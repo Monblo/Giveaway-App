@@ -9,7 +9,7 @@ function App() {
   return (
     <HashRouter>
       <Switch>
-          <Route path='/' component={Home} />
+          <Route exact path='/' component={Home} />
           <Route path='/logowanie' component={SignIn} />
           <Route path='/rejestracja' component={SignUp} />
           <Route path='/*' component={NotFound} />
