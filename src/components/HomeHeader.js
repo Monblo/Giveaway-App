@@ -1,45 +1,44 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import {HeaderButton, SignInButton} from "./Button.styles";
+import {HeaderButton, SignInButton} from "./Button/Button.styles";
 import {Theme} from "../Utils/Theme";
 import '../scss/main.scss'
+import decoration from '../assets/Decoration.svg'
+import ImgHeader from "./ImgHeader/ImgHeader";
+import {LinkStyled} from "./Link/Link.styles";
 
 const HomeHeader = () => {
     return (
-        <div>
-            <img src='../assets/Home-Hero-Image.jpg' />
-            <div>
+        <div className={'header__field'}>
+            <ImgHeader />
+            <div className={'header__nav_field'}>
                 <nav>
                     <div className={'nav__field'}>
-                        <Link style={{textDecoration: 'none',
-                            color: `${Theme.colors.darkColor}`,
-                            fontWeight: 300
-                        }}>
+                        <LinkStyled style={{fontWeight: 300}} to={'/logowanie'}>
                             <p className={'sign_in'}>Zaloguj</p>
-                        </Link>
-                        <Link>
+                        </LinkStyled>
+                        <LinkStyled to={'/rejestracja'}>
                             <SignInButton className={'sign_in'}>
                                 Załóż Konto
                             </SignInButton>
-                        </Link>
+                        </LinkStyled>
                     </div>
                     <div>
                         <ul className={'header__list'}>
-                            <li>Start</li>
-                            <li>O co chodzi?</li>
-                            <li>O nas</li>
-                            <li>Fundacja i organizacje</li>
-                            <li>Kontakt</li>
+                            <LinkStyled smooth to='/'><li>Start</li></LinkStyled>
+                            <LinkStyled smooth to='/section1'><li>O co chodzi?</li></LinkStyled>
+                            <LinkStyled smooth to={'aboutUs'}><li>O nas</li></LinkStyled>
+                            <LinkStyled smooth to='/section2'><li>Fundacja i organizacje</li></LinkStyled>
+                            <LinkStyled smooth to={'contact'}><li>Kontakt</li></LinkStyled>
                         </ul>
                     </div>
                 </nav>
-                <div className={'header__field'}>
+                <div className={'header__banner_field'}>
                     <h1>Zacznij pomagać!<br />
                         Oddaj niechciane rzeczy w zaufane ręce</h1>
-                    <img src='../assets/Decoration.svg' />
+                    <img src={decoration} />
                     <div>
-                        <Link><HeaderButton className={'button'}>Oddaj <br/>rzeczy</HeaderButton></Link>
-                        <Link><HeaderButton className={'button'}>Zorganizuj <br/>zbiórkę</HeaderButton></Link>
+                        <LinkStyled to={'/logowanie'}><HeaderButton className={'button'}>Oddaj <br/>rzeczy</HeaderButton></LinkStyled>
+                        <LinkStyled to={'/logowanie'}><HeaderButton className={'button'}>Zorganizuj <br/>zbiórkę</HeaderButton></LinkStyled>
                     </div>
                 </div>
             </div>
