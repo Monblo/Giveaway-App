@@ -3,6 +3,8 @@ Tech stuff:
 1.React
 2.react router
 3.react scroll
+4.styled components
+
 
 # Getting Started with Create React App
 

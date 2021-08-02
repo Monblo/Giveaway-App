@@ -1,18 +1,18 @@
 import React from 'react';
-import decoration from '../assets/Decoration.svg'
 import {LinkStyled} from "./Link/Link.styles";
 import {ButtonGiveAway} from "./Button/Button";
 import icon1 from "../assets/Icon-1.svg"
 import icon2 from "../assets/Icon-2.svg"
 import icon3 from "../assets/Icon-3.svg"
 import icon4 from "../assets/Icon-4.svg"
+import DecorationImg from "./DecorationImg/DecorationImg";
 
 const Instruction = () => {
     return (
         <div className={'instruction'} >
             <div className={'instruction__title'}>
                 <h2>Wystarczą 4 proste kroki</h2>
-                <img src={decoration} />
+                <DecorationImg />
             </div>
             <div className={'instruction__field'}>
                 <div className={'column instruction__column'}>
