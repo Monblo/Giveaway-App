@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {Theme} from "../../Utils/Theme";
 
 
-export const SignInButton = styled.button`
+export const ButtonStyled = styled.button`
   width: 5.625rem;
   height: 2.25rem;
   border: 1px solid ${Theme.colors.firstSectionColor};
@@ -11,7 +11,7 @@ export const SignInButton = styled.button`
   cursor: pointer;
 `
 
-export const HeaderButton = styled(SignInButton)`
+export const HeaderButton = styled(ButtonStyled)`
   width: 12.5rem;
   height: 5.125rem;
   text-transform: uppercase;

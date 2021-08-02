@@ -1,9 +1,10 @@
 import React from 'react';
-import {HeaderButton, SignInButton} from "./Button/Button.styles";
+import {ButtonStyled, HeaderButton} from "./Button/Button.styles";
 import '../scss/main.scss'
 import decoration from '../assets/Decoration.svg'
 import ImgHeader from "./ImgHeader/ImgHeader";
 import {LinkStyled} from "./Link/Link.styles";
+import {ButtonGiveAway} from "./Button/Button";
 
 const HomeHeader = () => {
     return (
@@ -16,9 +17,9 @@ const HomeHeader = () => {
                             <p className={'sign_in'}>Zaloguj</p>
                         </LinkStyled>
                         <LinkStyled to={'/rejestracja'}>
-                            <SignInButton className={'sign_in'}>
+                            <ButtonStyled className={'sign_in'}>
                                 Załóż Konto
-                            </SignInButton>
+                            </ButtonStyled>
                         </LinkStyled>
                     </div>
                     <div>
@@ -36,7 +37,7 @@ const HomeHeader = () => {
                         Oddaj niechciane rzeczy w zaufane ręce</h2>
                     <img src={decoration} />
                     <div>
-                        <LinkStyled to={'/logowanie'}><HeaderButton className={'button'}>Oddaj <br/>rzeczy</HeaderButton></LinkStyled>
+                        <LinkStyled to={'/logowanie'}><ButtonGiveAway /></LinkStyled>
                         <LinkStyled to={'/logowanie'}><HeaderButton className={'button'}>Zorganizuj <br/>zbiórkę</HeaderButton></LinkStyled>
                     </div>
                 </div>

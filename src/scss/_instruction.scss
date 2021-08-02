@@ -1,0 +1,39 @@
+.instruction {
+  text-align: center;
+
+  img {
+    width: 15%;
+    padding-top: 0.625rem;
+  }
+}
+
+.instruction__field {
+  background-color: $background-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+
+  img {
+    width: 55%;
+  }
+
+  h3 {
+    text-transform: none;
+  }
+
+  p {
+    font-family: $font-base;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+  }
+}
+
+.instruction__column {
+  margin: 0 2.5rem;
+}
+
+.instruction__title {
+  margin: 2rem 0;
+}
