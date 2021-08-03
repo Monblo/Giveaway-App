@@ -25,3 +25,14 @@ export const FooterButtonStyled = styled(ButtonStyled)`
   align-self: flex-end;
   margin-top: 0.75rem
 `;
+
+export const OrganizationsButton = styled(ButtonStyled)`
+  border-color: ${Theme.colors.lightColor};
+  width: 7rem;
+  height: 2.8rem;
+  margin: 2rem 3rem;
+  
+  &:focus {
+    border-color: ${Theme.colors.darkColor};
+  }
+`
