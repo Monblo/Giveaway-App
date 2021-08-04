@@ -9,7 +9,7 @@ import DecorationImg from "./DecorationImg/DecorationImg";
 
 const Instruction = () => {
     return (
-        <div className={'instruction'} >
+        <div className={'instruction'} name='instruction'>
             <div className={'instruction__title'}>
                 <h2>Wystarczą 4 proste kroki</h2>
                 <DecorationImg />

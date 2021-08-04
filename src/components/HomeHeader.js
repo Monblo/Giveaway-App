@@ -5,6 +5,8 @@ import decoration from '../assets/Decoration.svg'
 import ImgHeader from "./ImgHeader/ImgHeader";
 import {LinkStyled} from "./Link/Link.styles";
 import {ButtonGiveAway} from "./Button/Button";
+import {Link} from "react-scroll";
+
 
 const HomeHeader = () => {
     return (
@@ -25,10 +27,10 @@ const HomeHeader = () => {
                     <div>
                         <ul className={'header__list'}>
                             <LinkStyled smooth='true' to='/'><li>Start</li></LinkStyled>
-                            <LinkStyled smooth='true' to='/section1'><li>O co chodzi?</li></LinkStyled>
-                            <LinkStyled smooth='true' to='aboutUs'><li>O nas</li></LinkStyled>
-                            <LinkStyled smooth='true' to='/section2'><li>Fundacja i organizacje</li></LinkStyled>
-                            <LinkStyled smooth='true' to='contact'><li>Kontakt</li></LinkStyled>
+                            <Link smooth='true' to='instruction'><li>O co chodzi?</li></Link>
+                            <Link smooth='true' to='aboutUs'><li>O nas</li></Link>
+                            <Link smooth='true' to='organizations'><li>Fundacja i organizacje</li></Link>
+                            <Link smooth='true' to='contact'><li>Kontakt</li></Link>
                         </ul>
                     </div>
                 </nav>

@@ -7,7 +7,7 @@ import facebook from '../assets/Facebook.svg';
 
 const Footer = () => {
     return (
-        <div className={'footer'}>
+        <div className={'footer'} name='contact'>
             <div className={'footer__field'}>
                 <div className={'form'}>
                     <h2>Skontaktuj się z nami</h2>
