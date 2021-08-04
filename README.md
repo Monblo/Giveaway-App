@@ -1,9 +1,11 @@
 Tech stuff:
 
-1.React
-2.react router
-3.react scroll
-4.styled components
+1. React
+2. react router
+3. react scroll
+4. styled components
+5. table pagination
+6. firestore
 
 
 # Getting Started with Create React App
