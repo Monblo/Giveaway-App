@@ -1,10 +1,19 @@
 import React from 'react';
 
-const OrganizationsSection1 = () => {
-    return (
-        <div>
+const OrganizationsSection1 = ({institutions}) => {
 
-        </div>
+    return (
+        <table>
+            <tbody>
+                {institutions.map(el => {return <tr key={el.id}><td className={'row__name'}>
+                        <h2>{el.name}</h2>
+                        <i>{el.description}</i>
+                </td>
+                <td className={'row__text'}>{el.stuff}</td>
+                    </tr>}
+                    )}
+            </tbody>
+        </table>
     );
 };
 

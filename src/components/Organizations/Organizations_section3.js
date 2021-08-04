@@ -1,21 +1,16 @@
 import React from 'react';
 
-const OrganizationsSection3 = () => {
+const OrganizationsSection3 = ({locals}) => {
     return (
             <table>
                 <tbody>
-                <tr>
-                    <td className={'row__name'}><h2>Zbiórka "Lorem Ipsum 1"</h2>
-                        <i>Duis aute irure dolor in reprehenderit</i>
+                {locals.map(el => {return <tr key={el.id}><td className={'row__name'}>
+                        <h2>{el.name}</h2>
+                        <i>{el.description}</i>
                     </td>
-                    <td className={'row__text'}>Egestas, sed, tempus</td>
-                </tr>
-                <tr>
-                    <td className={'row__name'}><h2>Zbiórka "Lorem Ipsum 2"</h2>
-                        <i>Duis aute irure dolor in reprehenderit</i>
-                    </td>
-                    <td className={'row__text'}>Egestas, sed, tempus</td>
-                </tr>
+                        <td className={'row__text'}>{el.stuff}</td>
+                    </tr>}
+                )}
                 </tbody>
             </table>
     );
