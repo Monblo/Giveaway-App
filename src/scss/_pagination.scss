@@ -1,0 +1,15 @@
+.page__number {
+  display: flex;
+  justify-content: center;
+
+  li {
+    padding: 1rem;
+    border: 1px solid #fff;
+    cursor: pointer;
+
+    &:focus {
+      border-color: $dark-color;
+    }
+  }
+
+}

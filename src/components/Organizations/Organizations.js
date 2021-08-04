@@ -10,9 +10,9 @@ const Organizations = () => {
     const [section1, setSection1] = useState(false);
     const [section2, setSection2] = useState(false);
     const [section3, setSection3] = useState(false);
-    const [institutions, setInstitutions] = useState(null)
-    const [organizations, setOrganizations] = useState(null)
-    const [locals, setLocals] = useState(null)
+    const [institutions, setInstitutions] = useState(null);
+    const [organizations, setOrganizations] = useState(null);
+    const [locals, setLocals] = useState(null);
 
     //change the view
     const handleClick1 = () => {

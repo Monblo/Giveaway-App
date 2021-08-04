@@ -26,6 +26,10 @@
   table {
     width: 70%;
 
+    tbody {
+      height: 220px;
+    }
+
     tr {
       display: flex;
       justify-content: space-between;
