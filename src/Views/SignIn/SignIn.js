@@ -2,6 +2,7 @@ import React from 'react';
 import {LinkStyled} from "../../components/Link/Link.styles";
 import {ButtonStyled} from "../../components/Button/Button.styles";
 import {Link} from "react-scroll";
+import SignInForm from "./SignIn_Form";
 
 const SignIn = () => {
     return (<div>
@@ -26,7 +27,7 @@ const SignIn = () => {
                         </ul>
                     </div>
                 </nav>
-            <SignIn />
+            <SignInForm />
         </div>
     );
 };

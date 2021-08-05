@@ -1,9 +1,9 @@
 import React from 'react';
-import {LinkStyled} from "../components/Link/Link.styles";
-import {ButtonStyled, FooterButtonStyled} from "../components/Button/Button.styles";
+import {LinkStyled} from "../../components/Link/Link.styles";
+import {ButtonStyled, FooterButtonStyled} from "../../components/Button/Button.styles";
 import {Link} from "react-scroll";
-import decoration from "../assets/Decoration.svg";
-import {Theme} from "../Utils/Theme";
+import decoration from "../../assets/Decoration.svg";
+import SignUpForm from "./SignUp_Form";
 
 const SignUp = () => {
     return (
@@ -32,24 +32,7 @@ const SignUp = () => {
             <div className={'signIn__field'}>
                 <h2>Zaloguj się</h2>
                 <img src={decoration} />
-                <form className={'form__signIn'}>
-                    <label>Email</label>
-                    <input type='text'/>
-                    <label>Hasło</label>
-                    <input type='text'/>
-                    <label>Powtórz Hasło</label>
-                    <input type='text'/>
-                </form>
-            </div>
-            <div className={"signIn__buttons"}>
-                <LinkStyled to={'/rejestracja'}>
-                    <FooterButtonStyled className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
-                    Załóż konto
-                    </FooterButtonStyled>
-                </LinkStyled>
-                <LinkStyled to={'/logowanie'}>
-                <FooterButtonStyled className={'form__button'}>Zaloguj się</FooterButtonStyled>
-                </LinkStyled>
+                <SignUpForm />
             </div>
         </div>
     );
