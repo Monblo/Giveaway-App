@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {LinkStyled} from "../components/Link/Link.styles";
 import {ButtonStyled, FooterButtonStyled} from "../components/Button/Button.styles";
 import {Link} from "react-scroll";
@@ -6,6 +6,19 @@ import decoration from "../assets/Decoration.svg";
 import {Theme} from "../Utils/Theme";
 
 const SignIn = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
+    const nameChange = (e) => {
+        const tempName = e.target.value
+        setName(tempName)
+    };
+
+    const emailChange = (e) => {
+        const tempEmail = e.target.value
+        setEmail(tempEmail)
+    };
+
     return (<div>
                 <nav className={'nav__signIn'}>
                     <div className={'nav__field'}>
