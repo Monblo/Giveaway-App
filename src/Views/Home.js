@@ -2,7 +2,7 @@ import HomeHeader from "../components/HomeHeader";
 import HomeThreeColumns from "../components/HomeThreeColumns";
 import Instruction from "../components/Instruction";
 import AboutUs from "../components/AboutUs";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer/Footer";
 import Organizations from "../components/Organizations/Organizations";
 
 const Home = () => {

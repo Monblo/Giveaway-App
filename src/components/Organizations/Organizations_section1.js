@@ -26,7 +26,8 @@ const OrganizationsSection1 = ({institutions}) => {
                     </tr>}
                     )}
             </tbody>
-            <Pagination postPerPage={postPerPage} posts={institutions.length} changePage={changePage}/>
+            {institutions.length > postPerPage &&
+                <Pagination postPerPage={postPerPage} posts={institutions.length} changePage={changePage}/>}
         </table>
     );
 };

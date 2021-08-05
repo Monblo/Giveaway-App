@@ -39,9 +39,14 @@ const SignIn = () => {
                 </form>
             </div>
             <div className={"signIn__buttons"}>
-                <FooterButtonStyled className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
-                    Załóż konto</FooterButtonStyled>
-                <FooterButtonStyled className={'form__button'}>Zaloguj się</FooterButtonStyled>
+                <LinkStyled to={'/rejestracja'}>
+                    <FooterButtonStyled className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
+                        Załóż konto
+                    </FooterButtonStyled>
+                </LinkStyled>
+                <LinkStyled to={'/logowanie'}>
+                    <FooterButtonStyled className={'form__button'}>Zaloguj się</FooterButtonStyled>
+                </LinkStyled>
             </div>
         </div>
     );

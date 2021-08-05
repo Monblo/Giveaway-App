@@ -1,9 +1,13 @@
 .nav__signIn {
   margin-right: 6rem;
+
+  .nav__field {
+    margin-top: 1rem;
+  }
 }
 
 .signIn__field {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +20,12 @@
     align-items: flex-start;
     background-color: $background-color;
 
+    label {
+      font-size: 0.75rem;
+    }
+
     input {
+      width: 13rem;
       margin: 0.5rem 0;
       border: none;
       border-bottom: 1px solid $dark-color;

@@ -47,7 +47,7 @@
     font-size: 0.75rem;
     font-weight: 700;
     padding: 2rem 0;
-    max-width: 25.125rem;
+    max-width: 30rem;
 
     input {
       border: none;
@@ -64,7 +64,24 @@
   justify-content: space-between;
 
     .input__name {
-      padding-right: 1.875rem
+      padding-right: 1.875rem;
+      font-family: $font-base;
     }
 }
 
+.input__text {
+  height: 3.75rem;
+  border: none;
+  border-bottom: 1px solid $dark-color;
+  margin: 1rem 0;
+  width: 100%;
+  padding: 0;
+  resize: none;
+}
+
+.success {
+  font-family: $font-base;
+  font-weight: 700;
+  width: 12.5rem;
+  text-align: center;
+}

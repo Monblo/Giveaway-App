@@ -2,7 +2,7 @@ import {HashRouter, Route, Switch} from "react-router-dom";
 import Home from "./Views/Home";
 import SignIn from "./Views/SignIn";
 import NotFound from "./Views/NotFound";
-import SignUp from "./components/SignUp";
+import SignUp from "./Views/SignUp";
 
 function App() {
 
