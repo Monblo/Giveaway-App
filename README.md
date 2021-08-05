@@ -6,6 +6,7 @@ Tech stuff:
 4. styled components
 5. table pagination
 6. firestore
+7. form validation
 
 
 # Getting Started with Create React App

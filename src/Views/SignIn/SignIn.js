@@ -1,24 +1,9 @@
-import React, {useState} from 'react';
-import {LinkStyled} from "../components/Link/Link.styles";
-import {ButtonStyled, FooterButtonStyled} from "../components/Button/Button.styles";
+import React from 'react';
+import {LinkStyled} from "../../components/Link/Link.styles";
+import {ButtonStyled} from "../../components/Button/Button.styles";
 import {Link} from "react-scroll";
-import decoration from "../assets/Decoration.svg";
-import {Theme} from "../Utils/Theme";
 
 const SignIn = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-
-    const nameChange = (e) => {
-        const tempName = e.target.value
-        setName(tempName)
-    };
-
-    const emailChange = (e) => {
-        const tempEmail = e.target.value
-        setEmail(tempEmail)
-    };
-
     return (<div>
                 <nav className={'nav__signIn'}>
                     <div className={'nav__field'}>
@@ -41,26 +26,7 @@ const SignIn = () => {
                         </ul>
                     </div>
                 </nav>
-            <div className={'signIn__field'}>
-                <h2>Zaloguj się</h2>
-                <img src={decoration} />
-                <form className={'form__signIn'}>
-                    <label>Email</label>
-                    <input type='text'/>
-                    <label>Hasło</label>
-                    <input type='text'/>
-                </form>
-            </div>
-            <div className={"signIn__buttons"}>
-                <LinkStyled to={'/rejestracja'}>
-                    <FooterButtonStyled className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
-                        Załóż konto
-                    </FooterButtonStyled>
-                </LinkStyled>
-                <LinkStyled to={'/logowanie'}>
-                    <FooterButtonStyled className={'form__button'}>Zaloguj się</FooterButtonStyled>
-                </LinkStyled>
-            </div>
+            <SignIn />
         </div>
     );
 };

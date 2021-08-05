@@ -28,6 +28,7 @@ const Form = () => {
     //form validation
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (/\s/.test(name)){setNameError('Podane imię jest nieprawidłowe!')
         } else {
             setNameError(null)
