@@ -56,6 +56,16 @@ const Form = () => {
         } else {setSuccess(null)}
     },[nameError, emailError, msgError]);
 
+    const errorStyle = {
+        color:'red',
+        fontSize:'0.75rem',
+        fontWeight:'700'
+    };
+
+    const style = {
+        borderColor: 'red'
+    };
+
     return (
         <>
             {success && <p style={{color:'green'}} className={'success'}>{success}</p>}
@@ -63,26 +73,24 @@ const Form = () => {
             <div className={'form__info'}>
                 <div className={'input__name'}>
                     <label>Wpisz swoje imię</label>
-                    <input type='text' name='name' placeholder='Monika' value={name} onChange={nameChange}/>
-                    {nameError && <p style={{color:'red',
-                        fontSize:'0.75rem',
-                    fontWeight:'700'}}>{nameError}</p>}
+                    {nameError ? <><input type='text' name='name' placeholder='Monika' value={name} style={style} onChange={nameChange}/>
+                        <p style={errorStyle}>{nameError}</p>
+                        </> : <input type='text' name='name' placeholder='Monika' value={name} onChange={nameChange}/>}
                 </div>
                 <div>
                     <label>Wpisz swój email</label>
-                    <input type='text' name='email' placeholder='abc@xyz.pl' value={email} onChange={emailChange}/>
-                    {emailError && <p style={{color:'red',
-                        fontSize:'0.75rem',
-                        fontWeight:'700'}}>{emailError}</p>}
+                    {emailError ? <><input type='text' name='email' placeholder='abc@xyz.pl' value={email} style={style} onChange={emailChange}/>
+                        <p style={errorStyle}>{emailError}</p>
+                    </> : <input type='text' name='email' placeholder='abc@xyz.pl' value={email} onChange={emailChange}/>}
                 </div>
             </div>
             <label>Wpisz swoją wiadomość</label>
-            <textarea name='text' className={'input__text'} value={message} onChange={messageChange}
-                   placeholder='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.'/>
+            {msgError ? <><textarea name='text' className={'input__text'} value={message} style={style} onChange={messageChange}
+                                    placeholder='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.'/>
+            <p style={errorStyle}>{msgError}</p>
+            </> : <textarea name='text' className={'input__text'} value={message} onChange={messageChange}
+                            placeholder='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.'/>}
             {/*<LinkStyled to='/logowanie'>*/}
-            {msgError && <p style={{color:'red',
-                fontSize:'0.75rem',
-                fontWeight:'700'}}>{msgError}</p>}
             <FooterButtonStyled type='submit' className={'form__button'} >Wyślij</FooterButtonStyled>
             {/*</LinkStyled>*/}
         </form>
