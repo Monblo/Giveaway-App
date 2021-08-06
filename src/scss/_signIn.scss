@@ -1,3 +1,16 @@
+.form__signIn__field {
+  background-color: $background-color;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  p {
+    margin-top: 0;
+    line-height: 0;
+  }
+}
+
 .nav__signIn {
   margin-right: 6rem;
 
@@ -6,19 +19,26 @@
   }
 }
 
-.signIn__field {
-  margin-top: 1rem;
+.signIn__buttons {
+    margin-top: 2rem;
+    text-align: center;
+
+    .form__button {
+      margin: 0 5rem;
+    }
+}
+
+.signIn__container {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   .form__signIn {
     margin-top: 1rem;
-    padding: 2rem 3rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    background-color: $background-color;
+    align-items: center;
 
     label {
       font-size: 0.75rem;
@@ -31,14 +51,5 @@
       border-bottom: 1px solid $dark-color;
       background-color: $background-color;
     }
-  }
-}
-
-.signIn__buttons {
-  margin-top: 2rem;
-  text-align: center;
-
-  .form__button {
-    margin: 0 5rem;
   }
 }

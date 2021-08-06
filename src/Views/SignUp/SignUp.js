@@ -29,11 +29,7 @@ const SignUp = () => {
                     </ul>
                 </div>
             </nav>
-            <div className={'signIn__field'}>
-                <h2>Zaloguj się</h2>
-                <img src={decoration} />
-                <SignUpForm />
-            </div>
+            <SignUpForm />
         </div>
     );
 };

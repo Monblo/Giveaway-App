@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import decoration from "../../assets/Decoration.svg";
 import {LinkStyled} from "../../components/Link/Link.styles";
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
@@ -48,34 +48,51 @@ const SignUpForm = () => {
         }
     };
 
+    useEffect(() => {
+        if (emailError == null && passwordError == null && password2Error == null){
+            setPassword('');
+            setEmail('');
+            setPassword2('');
+        }
+    }, [emailError, passwordError, password2Error]);
+
+    const errorStyle = {
+        color:'red',
+        fontSize:'0.75rem',
+        fontWeight:'700'
+    };
+
+    const style = {
+        borderColor: 'red'
+    };
+
     return (
-        <div className={'signIn__field'}>
-            <h2>Zaloguj się</h2>
+        <div className={'signIn__container'}>
+            <h2>Zarejestruj się</h2>
             <img src={decoration} />
             <form className={'form__signIn'} onSubmit={handleSumbit}>
-                <label>Email</label>
-                <input type='text' name={'email'} value={email} onChange={emailChange}/>
-                {emailError && <p style={{color:'red',
-                    fontSize:'0.75rem',
-                    fontWeight:'700'}}>{emailError}</p>}
-                <label>Hasło</label>
-                <input type='text' name={'password'} onChange={passwordChange}/>
-                {passwordError && <p style={{color:'red',
-                    fontSize:'0.75rem',
-                    fontWeight:'700'}}>{passwordError}</p>}
-                <label>Powtórz Hasło</label>
-                <input type='text' name={'password2'} onChange={password2Change}/>
-                {password2Error && <p style={{color:'red',
-                    fontSize:'0.75rem',
-                    fontWeight:'700'}}>{password2Error}</p>}
+                <div className={'form__signIn__field'}>
+                    <label>Email</label>
+                    {emailError ? <>
+                        <input type='text' name={'email'} value={email} onChange={emailChange}
+                               style={style} />
+                        <p style={errorStyle}>{emailError}</p>
+                    </> : <input type='text' name={'email'} value={email} onChange={emailChange}/>}
+                    <label>Hasło</label>
+                    {passwordError ? <><input type='text' name={'password'} style={style} onChange={passwordChange}/>
+                        <p style={errorStyle}>{passwordError}</p>
+                    </> : <input type='text' name={'password'} onChange={passwordChange}/>}
+                    <label>Powtórz Hasło</label>
+                    {passwordError ? <><input type='text' name={'password2'} style={style} onChange={password2Change}/>
+                        <p style={errorStyle}>{password2Error}</p>
+                    </> : <input type='text' name={'password2'} onChange={password2Change}/>}
+                </div>
                 <div className={"signIn__buttons"}>
-                    <LinkStyled to={'/rejestracja'}>
-                        <FooterButtonStyled className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
+                    <FooterButtonStyled type='submit' className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
                             Załóż konto
-                        </FooterButtonStyled>
-                    </LinkStyled>
+                    </FooterButtonStyled>
                     <LinkStyled to={'/logowanie'}>
-                        <FooterButtonStyled type='submit' className={'form__button'}>Zaloguj się</FooterButtonStyled>
+                        <FooterButtonStyled className={'form__button'}>Zaloguj się</FooterButtonStyled>
                     </LinkStyled>
                 </div>
             </form>
