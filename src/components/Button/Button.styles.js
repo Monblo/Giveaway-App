@@ -23,7 +23,8 @@ export const HeaderButton = styled(ButtonStyled)`
 export const FooterButtonStyled = styled(ButtonStyled)`
   border-color: ${Theme.colors.darkColor};
   align-self: flex-end;
-  margin-top: 0.75rem
+  margin-top: 0.75rem;
+  cursor: pointer;
 `;
 
 export const OrganizationsButton = styled(ButtonStyled)`

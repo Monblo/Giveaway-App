@@ -16,9 +16,10 @@ const OrganizationsSection1 = ({institutions}) => {
     };
 
     return (
+        <>
         <table>
             <tbody>
-                {currentPosts.map(el => {return <tr key={el.id}><td className={'row__name'}>
+                {currentPosts.map((el,index) => {return <tr key={index}><td className={'row__name'}>
                         <h2>{el.name}</h2>
                         <i>{el.description}</i>
                 </td>
@@ -26,9 +27,10 @@ const OrganizationsSection1 = ({institutions}) => {
                     </tr>}
                     )}
             </tbody>
-            {institutions.length > postPerPage &&
-                <Pagination postPerPage={postPerPage} posts={institutions.length} changePage={changePage}/>}
         </table>
+    {institutions.length > postPerPage &&
+    <Pagination postPerPage={postPerPage} posts={institutions.length} changePage={changePage}/>}
+        </>
     );
 };
 

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FooterButtonStyled} from "../Button/Button.styles";
+import {postForm} from "./fetch_api";
 
 const Form = () => {
     const [name, setName] = useState('');
@@ -39,17 +40,28 @@ const Form = () => {
             setMsgError(null)
         }
 
-        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+        const re = /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
         if (re.test(email)){setEmailError(null)
         } else {
             setEmailError('Podany email jest nieprawidłowy!')
         }
+
+        // if (nameError == null && emailError == null && msgError == null){
+        //
+        //
+        // }
     };
 
     //display success text
     useEffect(() => {
         if (nameError == null && emailError == null && msgError == null){
             setSuccess('Wiadomość została wysłana! Wkrótce się skontaktujemy.');
+            const formData = {
+                name: name,
+                email: email,
+                message: message
+            };
+            postForm(formData)
             setName('');
             setMessage('');
             setEmail('');

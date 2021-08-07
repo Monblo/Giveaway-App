@@ -7,6 +7,7 @@ Tech stuff:
 5. table pagination
 6. firestore
 7. form validation
+8. fetch POST data from contact form to Coderslab endpoint
 
 
 # Getting Started with Create React App
