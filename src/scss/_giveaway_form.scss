@@ -1,0 +1,40 @@
+.giveaway__field {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: -4rem;
+}
+
+.giveaway__instruction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h3 {
+    font-weight: 300;
+  }
+}
+
+.giveaway__instruction__field {
+  text-align: center;
+  max-width: 60px;
+  margin: 2rem 1.5rem;
+  position: relative;
+  line-height: .1rem;
+
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    border: 1px solid $dark-color;
+    width: 100px;
+    height: 100px;
+    margin-left: -1.25rem;
+    transform: rotate(45deg);
+  }
+}
+
+.giveaway__nav_field {
+  width: 50%;
+}
+

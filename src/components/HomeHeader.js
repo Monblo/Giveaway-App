@@ -2,7 +2,7 @@ import React from 'react';
 import {ButtonStyled, HeaderButton} from "./Button/Button.styles";
 import '../scss/main.scss'
 import decoration from '../assets/Decoration.svg'
-import ImgHeader from "./ImgHeader/ImgHeader";
+import {ImgHeader} from "./Img/Img";
 import {LinkStyled} from "./Link/Link.styles";
 import {ButtonGiveAway} from "./Button/Button";
 import {Link} from "react-scroll";

@@ -41,7 +41,7 @@ const Instruction = () => {
                 </div>
             </div>
             <div>
-                <LinkStyled to='/logowanie'><ButtonGiveAway /></LinkStyled>
+                <LinkStyled to='/giveaway'><ButtonGiveAway /></LinkStyled>
             </div>
         </div>
     );
