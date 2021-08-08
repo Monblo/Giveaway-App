@@ -10,7 +10,7 @@ const Pagination = ({postPerPage, posts, changePage}) => {
     return (
         <div>
             <ul className={'page__number'}>
-                {pageNumbers.map(number => <li key={number} onClick={() => changePage(number)}>
+                {pageNumbers.map(number => <li key={number} tabIndex='0' onClick={() => changePage(number)}>
                     {number}
                 </li>)}
             </ul>
