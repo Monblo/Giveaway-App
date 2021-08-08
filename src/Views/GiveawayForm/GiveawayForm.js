@@ -6,6 +6,7 @@ import {ButtonStyled} from "../../components/Button/Button.styles";
 import {Link} from "react-scroll";
 import decoration from "../../assets/Decoration.svg";
 import Footer from "../../components/Footer/Footer";
+import GiveawayForm_page2 from "./GiveawayForm_page2";
 
 const GiveawayForm = () => {
     return (
@@ -61,6 +62,7 @@ const GiveawayForm = () => {
                 </div>
             </div>
             <GiveawayForm_page1 />
+            <GiveawayForm_page2 />
             <Footer />
         </div>
     );

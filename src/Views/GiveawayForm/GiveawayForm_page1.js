@@ -38,7 +38,8 @@ const GiveawayFormPage1 = () => {
                     inne
                 </label>
                 <FooterButtonStyled style={{backgroundColor:'transparent',
-                marginTop:'4rem'}}>Dalej</FooterButtonStyled>
+                    position:'absolute',
+                    bottom:'7rem'}}>Dalej</FooterButtonStyled>
             </div>
         </div>
     );
