@@ -1,8 +1,71 @@
+.alert__field {
+  padding: 2rem 5rem;
+  background-color: $first-section-color;
+  line-height: 0;
+
+  h2 {
+    text-align: left;
+    font-weight: 700;
+  }
+
+  p {
+    font-family: $font-base;
+    font-weight: 400;
+    font-size: .875rem;
+  }
+}
+
+.checkbox {
+  position: relative;
+  display: flex;
+  margin: 1.5rem 0;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  input:checked + span {
+    background-color: $first-section-color;
+  }
+
+  .checkmark {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: transparent;
+    border: 1px solid $dark-color;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+}
+
 .giveaway__field {
   display: flex;
   justify-content: center;
   position: relative;
   left: -4rem;
+}
+
+.giveaway__form {
+  max-width: 100%;
+  height: 600px;
+  background-image: url("../assets/Background-Form.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 2rem 5rem;
+
+  h2 {
+    text-align: left;
+  }
+
+  p {
+    margin: 0;
+    font-family: $font-base;
+    font-size: 1rem;
+  }
 }
 
 .giveaway__instruction {
@@ -17,7 +80,7 @@
 
 .giveaway__instruction__field {
   text-align: center;
-  max-width: 60px;
+  max-width: 3.75rem;
   margin: 2rem 1.5rem;
   position: relative;
   line-height: .1rem;
@@ -27,8 +90,8 @@
     position: absolute;
     display: block;
     border: 1px solid $dark-color;
-    width: 100px;
-    height: 100px;
+    width: 6.25rem;
+    height: 6.25rem;
     margin-left: -1.25rem;
     transform: rotate(45deg);
   }
