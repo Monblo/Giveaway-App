@@ -104,6 +104,46 @@
   width: 50%;
 }
 
+.input__data {
+  display: flex;
+
+  .input__address {
+    display: flex;
+    flex-direction: column;
+
+    .input__address__element {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: .4rem 5rem .5rem 0;
+
+      label {
+        display: inline;
+        width: 6rem;
+      }
+
+      input {
+        background-color: transparent;
+        border: 1px solid $dark-color;
+        width: 10rem;
+        height: 1.3rem;
+      }
+
+      .input__supplier {
+        height: 5rem;
+        background-color: transparent;
+        border: 1px solid $dark-color;
+        width: 10rem;
+        resize: none;
+      }
+
+      .label__supplier {
+        align-self: flex-start;
+      }
+    }
+  }
+}
+
 .input__localization {
   margin-top: 1rem;
   width: 22rem;
