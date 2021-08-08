@@ -1,16 +1,86 @@
-import React from 'react';
-import GiveawayForm_page1 from "./GiveawayForm_page1";
+import React, {useState} from 'react';
 import {ImgGiveaway} from "../../components/Img/Img";
 import {LinkStyled} from "../../components/Link/Link.styles";
 import {ButtonStyled} from "../../components/Button/Button.styles";
 import {Link} from "react-scroll";
 import decoration from "../../assets/Decoration.svg";
 import Footer from "../../components/Footer/Footer";
-import GiveawayForm_page2 from "./GiveawayForm_page2";
 import GiveawayFormPage3 from "./GiveawayForm_page3";
 import GiveawayFormPage4 from "./GiveawayForm_page4";
+import GiveawayForm_thank_you from "./GiveawayForm_thank_you";
+import GiveawayFormPage1 from "./GiveawayForm_page1";
+import GiveawayFormPage2 from "./GiveawayForm_page2";
+import GiveawayFormSummary from "./GiveawayForm_summary";
 
 const GiveawayForm = () => {
+    const [type, setType] = useState();
+    const [bags, setBags] = useState();
+    const [localization, setLocalization] = useState();
+    const [helpGroup, setHelpGroup] = useState();
+    const [street, setStreet] = useState();
+    const [city, setCity] = useState();
+    const [postCode, setPostCode] = useState();
+    const [phone, setPhone] = useState();
+    const [date, setDate] = useState();
+    const [hour, setHour] = useState();
+    const [comment, setComment] = useState();
+
+    const props = [type, bags, localization, helpGroup, street, city, postCode, phone, date, hour, comment];
+
+    const handleCheckType = (e) => {
+        setType(e.target.value)
+    };
+
+    const handleBagsNumber = (e) => {
+        setBags(e.target.value)
+    };
+
+    const handleLocalization = (e) => {
+        setLocalization(e.target.value)
+    };
+
+    const handleHelpGroup = (e) => {
+        setHelpGroup(e.target.value)
+    };
+
+    const handleStreet = (e) => {
+        const tempStreet = e.target.value;
+        setStreet(tempStreet)
+    };
+
+    const handleCity = (e) => {
+        const tempCity = e.target.value;
+        setCity(tempCity)
+    };
+
+    const handlePostCode = (e) => {
+        const tempPostCode = e.target.value;
+        setPostCode(tempPostCode)
+    };
+
+    const handlePhone = (e) => {
+        const tempPhone = e.target.value;
+        setPhone(tempPhone)
+    };
+
+    const handleDate = (e) => {
+        const tempDate = e.target.value;
+        setDate(tempDate)
+    };
+
+    const handleHour = (e) => {
+        const tempHour = e.target.value;
+        setHour(tempHour)
+    };
+
+    const handleComment = (e) => {
+        const tempComment = e.target.value;
+        setComment(tempComment)
+    };
+
+    const functions = [handleStreet, handleCity, handlePhone, handlePostCode, handleDate, handleComment,
+    handleHour];
+
     return (
         <div>
             <div className={'giveaway__field'}>
@@ -63,10 +133,13 @@ const GiveawayForm = () => {
                     </div>
                 </div>
             </div>
-            <GiveawayForm_page1 />
-            <GiveawayForm_page2 />
-            <GiveawayFormPage3 />
-            <GiveawayFormPage4 />
+            <GiveawayFormPage1 handleCheckType={handleCheckType}/>
+            <GiveawayFormPage2 handleBagsNumber={handleBagsNumber} bags={bags}/>
+            <GiveawayFormPage3 handleLocalization={handleLocalization} localization={localization}
+            handleHelpGroup={handleHelpGroup}/>
+            <GiveawayFormPage4 functions={functions} props={props}/>
+            <GiveawayFormSummary props={props}/>
+            <GiveawayForm_thank_you />
             <Footer />
         </div>
     );

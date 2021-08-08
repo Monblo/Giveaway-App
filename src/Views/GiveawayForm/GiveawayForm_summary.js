@@ -1,53 +1,56 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
+import icon1 from '../../assets/Icon-1.svg';
+import icon4 from "../../assets/Icon-4.svg";
 
-const GiveawayFormPage4 = ({functions, props}) => {
-    const [street, city, postCode, phone, date, hour, comment] = props;
-    const [handleStreet, handleCity, handlePhone, handlePostCode, handleDate, handleComment,
-        handleHour] = functions;
+const GiveawayFormSummary = ({props}) => {
+    const [type, bags, localization, helpGroup, street, city, postCode, phone, date, hour, comment] = props;
 
     return (
-        <div>
-            <div className={'alert__field'}>
-                <h2>Ważne!</h2>
-                <p>Podaj adres oraz termin odbioru rzeczy.</p>
-            </div>
             <div className={'giveaway__form'}>
-                <p>Krok 4/4</p>
-                <h2>Podaj adres oraz termin odbioru rzeczy przez kuriera</h2>
+                <h2>Podsumowanie Twojej darowizny</h2>
+                <h3>Oddajesz:</h3>
+                <div className={'summary__icon'}>
+                    <img src={icon1}/>
+                    <p>{bags} worki, {type}, {helpGroup}</p>
+                </div>
+                <div className={'summary__icon'}>
+                    <img src={icon4}/>
+                    <p>dla lokalizacji: {localization}</p>
+                </div>
                 <div className={'input__data'}>
                     <div className={'input__address'}>
                         <h3>Adres odbioru:</h3>
                         <div className={'input__address__element'}>
                             <label>Ulica</label>
-                            <input type='text' value={street} onChange={handleStreet}/>
+                            <p>{street}</p>
                         </div>
                         <div className={'input__address__element'}>
                             <label>Miasto</label>
-                            <input type='text' value={city} onChange={handleCity}/>
+                            <p>{city}</p>
                         </div>
                         <div className={'input__address__element'}>
                             <label>Kod pocztowy</label>
-                            <input type='text' value={postCode} onChange={handlePostCode}/>
+                            <p>{postCode}</p>
                         </div>
                         <div className={'input__address__element'}>
                             <label>Numer telefonu</label>
-                            <input type='text' value={phone} onChange={handlePhone}/>
+                            <p>{phone}</p>
                         </div>
                     </div>
                     <div className={'input__address'}>
                         <h3>Termin odbioru:</h3>
                         <div className={'input__address__element'}>
                             <label>Data</label>
-                            <input type='text' value={date} onChange={handleDate}/>
+                            <p>{date}</p>
                         </div>
                         <div className={'input__address__element'}>
                             <label>Godzina</label>
-                            <input type='text' value={hour} onChange={handleHour}/>
+                            <p>{hour}</p>
                         </div>
                         <div className={'input__address__element '}>
                             <label className={'label__supplier'}>Uwagi <br/>dla kuriera</label>
-                            <textarea className={'input__supplier'} value={comment} onChange={handleComment}/>
+                            <p>{comment}</p>
                         </div>
                     </div>
                 </div>
@@ -58,11 +61,10 @@ const GiveawayFormPage4 = ({functions, props}) => {
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}}>Dalej</FooterButtonStyled>
+                        left: '12rem'}}>Potwierdzam</FooterButtonStyled>
                 </div>
             </div>
-        </div>
     );
 };
 
-export default GiveawayFormPage4;
+export default GiveawayFormSummary;

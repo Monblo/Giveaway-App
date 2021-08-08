@@ -1,12 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 
-const GiveawayFormPage2 = () => {
-    const [title, setTitle] = useState();
-
-    const changeNumbers = (e) => {
-        setTitle(e.target.value)
-    };
+const GiveawayFormPage2 = ({handleBagsNumber, bags}) => {
 
     return (
         <div>
@@ -20,7 +15,7 @@ const GiveawayFormPage2 = () => {
                 <h2>Podaj liczbę worków, w które spakowałeś/aś rzeczy:</h2>
                 <div className={'select__step2'}>
                     <p>Liczba 60l worków:</p>
-                        <select value={title} onChange={changeNumbers}>
+                        <select value={bags} onChange={handleBagsNumber}>
                             <option className={'hidden'} value="0">-wybierz-</option>
                             <option className={'select__item'} value="1">1</option>
                             <option className={'select__item'} value="2">2</option>

@@ -52,6 +52,7 @@
 .giveaway__form {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   max-width: 100%;
   height: 600px;
   background-image: url("../assets/Background-Form.jpg");
@@ -60,14 +61,17 @@
   padding: 2rem 5rem;
   position: relative;
 
-  h2 {
-    text-align: left;
-  }
-
   p {
     margin: 0;
     font-family: $font-base;
     font-size: 1rem;
+  }
+
+  .form__thank_you {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    text-align: center;
   }
 }
 
@@ -113,9 +117,9 @@
 
     .input__address__element {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       margin: .4rem 5rem .5rem 0;
+      text-align: left;
 
       label {
         display: inline;
@@ -139,6 +143,10 @@
 
       .label__supplier {
         align-self: flex-start;
+      }
+
+      p {
+        width: 10rem;
       }
     }
   }
@@ -196,3 +204,13 @@
   }
 }
 
+.summary__icon {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+  }
+}
