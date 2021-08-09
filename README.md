@@ -5,9 +5,10 @@ Tech stuff:
 3. react scroll
 4. styled components
 5. table pagination
-6. firestore
-7. form validation
-8. fetch POST data from contact form to Coderslab endpoint
+6. get data from firestore
+7. add data to firestore
+8. form validation
+9. fetch POST data of contact form to Coderslab endpoint
 
 
 # Getting Started with Create React App

@@ -52,7 +52,7 @@ const Form = () => {
         // }
     };
 
-    //display success text
+    //display success text & post data to endpoint
     useEffect(() => {
         if (nameError == null && emailError == null && msgError == null){
             setSuccess('Wiadomość została wysłana! Wkrótce się skontaktujemy.');

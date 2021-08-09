@@ -11,6 +11,7 @@ import GiveawayForm_thank_you from "./GiveawayForm_thank_you";
 import GiveawayFormPage1 from "./GiveawayForm_page1";
 import GiveawayFormPage2 from "./GiveawayForm_page2";
 import GiveawayFormSummary from "./GiveawayForm_summary";
+import {db} from "../../firebase";
 
 const GiveawayForm = () => {
     const [type, setType] = useState('');
@@ -87,6 +88,44 @@ const GiveawayForm = () => {
     const functions = [handleStreet, handleCity, handlePhone, handlePostCode, handleDate, handleComment,
     handleHour];
 
+    //add data to firestore from state
+    const addNewGiveawayData = () => {
+        db.collection('giveaway')
+            .add({
+                type: type,
+                bags: bags,
+                localization: localization,
+                helpGroup: helpGroup,
+                organization: helpGroupOption,
+                street: street,
+                city: city,
+                postCode: postCode,
+                phone: phone,
+                date: date,
+                hour: hour,
+                comment: comment
+            })
+            .then(r => console.log(r))
+            .catch(err => console.log(err))
+    };
+
+    //submit giveaway form and send data to firestore
+    const handleSubmit = () => {
+        addNewGiveawayData();
+        setType('');
+        setBags('');
+        setLocalization('');
+        setHelpGroup('');
+        setHelpGroupOption('');
+        setStreet('');
+        setCity('');
+        setPostCode('');
+        setPhone('');
+        setDate('');
+        setHour('');
+        setComment('');
+    };
+
     return (
         <div>
             <div className={'giveaway__field'}>
@@ -145,7 +184,7 @@ const GiveawayForm = () => {
             handleHelpGroup={handleHelpGroup} helpGroup={helpGroup} option={helpGroupOption}
             handleOption={handleHelpGroupOption}/>
             <GiveawayFormPage4 functions={functions} props={props}/>
-            <GiveawayFormSummary props={props}/>
+            <GiveawayFormSummary props={props} handleSubmit={handleSubmit}/>
             <GiveawayForm_thank_you />
             <Footer />
         </div>

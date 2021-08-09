@@ -3,7 +3,7 @@ import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import icon1 from '../../assets/Icon-1.svg';
 import icon4 from "../../assets/Icon-4.svg";
 
-const GiveawayFormSummary = ({props}) => {
+const GiveawayFormSummary = ({props, handleSubmit}) => {
     const [type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date,
         hour, comment] = props;
 
@@ -62,7 +62,7 @@ const GiveawayFormSummary = ({props}) => {
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}}>Potwierdzam</FooterButtonStyled>
+                        left: '12rem'}} onClick={handleSubmit}>Potwierdzam</FooterButtonStyled>
                 </div>
             </div>
     );
