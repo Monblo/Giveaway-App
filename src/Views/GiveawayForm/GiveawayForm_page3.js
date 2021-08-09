@@ -2,13 +2,16 @@ import React, {useState} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 
 const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, helpGroup, option,
-                               handleOption}) => {
+                               handleOption, setSecondPage, setThirdPage, setFourthPage}) => {
 
     const [helpGroupError, setHelpGroupError] = useState();
 
     const handleSubmit = () => {
         if (helpGroup === ''){setHelpGroupError('Musisz wybrać jedną grupę!')
-        } else {setHelpGroupError(null)}
+        } else {setHelpGroupError(null);
+            setFourthPage(true);
+            setThirdPage(false);
+        }
     };
 
     const style = {
@@ -16,6 +19,12 @@ const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, h
         fontSize: '.8rem',
         fontWeight: '700',
         width: '20rem'
+    };
+
+    //move to previous step
+    const handlePrev = () => {
+        setThirdPage(false)
+        setSecondPage(true)
     };
 
     return (
@@ -52,7 +61,7 @@ const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, h
                 <div>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
-                        bottom:'7rem'}}>Wstecz</FooterButtonStyled>
+                        bottom:'7rem'}} onClick={handlePrev}>Wstecz</FooterButtonStyled>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',

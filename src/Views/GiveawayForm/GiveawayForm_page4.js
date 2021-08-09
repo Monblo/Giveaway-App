@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 
-const GiveawayFormPage4 = ({functions, props}) => {
-    const [type, bags, localization, helpGroup, street, city, postCode, phone, date, hour, comment] = props;
+const GiveawayFormPage4 = ({functions, props, setFourthPage, setSummaryPage, setThirdPage}) => {
+    const [type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date, hour, comment] = props;
     const [handleStreet, handleCity, handlePhone, handlePostCode, handleDate, handleComment,
         handleHour] = functions;
     const [streetError, setStreetError] = useState();
@@ -18,7 +18,7 @@ const GiveawayFormPage4 = ({functions, props}) => {
         if (city.length < 2){setCityError('Niepoprawna nazwa miasta')
         } else {setCityError(null)}
 
-        const reg=/^[0-9]{3}(?:-[0-9]{2})?$/;
+        const reg=/^[0-9]{2}(?:-[0-9]{3})?$/;
         if (reg.test(postCode)){setPostCodeError(null)
         } else {setPostCodeError('Niepoprawny kod pocztowy')}
 
@@ -30,10 +30,24 @@ const GiveawayFormPage4 = ({functions, props}) => {
         } else {setHourError('Niepoprawna godzina')}
     };
 
+    useEffect(()=> {
+        if (streetError === null && cityError === null && postCodeError === null && phoneError === null &&
+            hourError === null){
+            setFourthPage(false);
+            setSummaryPage(true);
+        }
+    }, [streetError, cityError, postCodeError, phoneError, hourError]);
+
     const style = {
         color: 'red',
         fontSize: '.8rem',
         fontWeight: '700'
+    };
+
+    //move to previous step
+    const handlePrev = () => {
+        setFourthPage(false);
+        setThirdPage(true);
     };
 
     return (
@@ -89,7 +103,7 @@ const GiveawayFormPage4 = ({functions, props}) => {
                 <div>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
-                        bottom:'7rem'}}>Wstecz</FooterButtonStyled>
+                        bottom:'7rem'}} onClick={handlePrev}>Wstecz</FooterButtonStyled>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',

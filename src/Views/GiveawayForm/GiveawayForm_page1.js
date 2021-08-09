@@ -1,7 +1,13 @@
 import React from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 
-const GiveawayFormPage1 = ({handleCheckType}) => {
+const GiveawayFormPage1 = ({handleCheckType, setFirstPage, setSecondPage}) => {
+
+    //move to next step
+    const handleNext = () => {
+        setFirstPage(false);
+        setSecondPage(true)
+    };
 
     return (
         <div>
@@ -42,7 +48,8 @@ const GiveawayFormPage1 = ({handleCheckType}) => {
                 <div>
                 <FooterButtonStyled style={{backgroundColor:'transparent',
                     position:'absolute',
-                    bottom:'7rem'}}>Dalej</FooterButtonStyled>
+                    bottom:'7rem'}}
+                onClick={handleNext}>Dalej</FooterButtonStyled>
                 </div>
             </div>
         </div>

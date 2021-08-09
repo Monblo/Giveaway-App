@@ -27,6 +27,13 @@ const GiveawayForm = () => {
     const [hour, setHour] = useState('');
     const [comment, setComment] = useState('');
 
+    const [firstPage, setFirstPage] = useState(true);
+    const [secondPage, setSecondPage] = useState(false);
+    const [thirdPage, setThirdPage] = useState(false);
+    const [fourthPage, setFourthPage] = useState(false);
+    const [summaryPage, setSummaryPage] = useState(false);
+    const [thankyouPage, setThankyouPage] = useState(false);
+
     const props = [type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date, hour, comment];
 
     const handleCheckType = (e) => {
@@ -112,6 +119,8 @@ const GiveawayForm = () => {
     //submit giveaway form and send data to firestore
     const handleSubmit = () => {
         addNewGiveawayData();
+        setSummaryPage(false);
+        setThankyouPage(true);
         setType('');
         setBags('');
         setLocalization('');
@@ -178,14 +187,24 @@ const GiveawayForm = () => {
                     </div>
                 </div>
             </div>
-            <GiveawayFormPage1 handleCheckType={handleCheckType}/>
-            <GiveawayFormPage2 handleBagsNumber={handleBagsNumber} bags={bags}/>
-            <GiveawayFormPage3 handleLocalization={handleLocalization} localization={localization}
+            {firstPage && <GiveawayFormPage1 handleCheckType={handleCheckType} setFirstPage={setFirstPage}
+            setSecondPage={setSecondPage}/>}
+
+            {secondPage && <GiveawayFormPage2 handleBagsNumber={handleBagsNumber} bags={bags} setFirstPage={setFirstPage}
+                                              setSecondPage={setSecondPage} setThirdPage={setThirdPage} />}
+
+            {thirdPage && <GiveawayFormPage3 handleLocalization={handleLocalization} localization={localization}
             handleHelpGroup={handleHelpGroup} helpGroup={helpGroup} option={helpGroupOption}
-            handleOption={handleHelpGroupOption}/>
-            <GiveawayFormPage4 functions={functions} props={props}/>
-            <GiveawayFormSummary props={props} handleSubmit={handleSubmit}/>
-            <GiveawayForm_thank_you />
+            handleOption={handleHelpGroupOption} setSecondPage={setSecondPage} setThirdPage={setThirdPage}
+            setFourthPage={setFourthPage}/>}
+
+            {fourthPage && <GiveawayFormPage4 functions={functions} props={props} setThirdPage={setThirdPage}
+                                              setFourthPage={setFourthPage} setSummaryPage={setSummaryPage}/>}
+
+            {summaryPage && <GiveawayFormSummary props={props} handleSubmit={handleSubmit} setFourthPage={setFourthPage}
+                                                 setSummaryPage={setSummaryPage} setThankyouPage={setThankyouPage}/>}
+
+            {thankyouPage && <GiveawayForm_thank_you />}
             <Footer />
         </div>
     );

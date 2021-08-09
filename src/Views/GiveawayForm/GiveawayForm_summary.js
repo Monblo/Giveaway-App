@@ -3,9 +3,15 @@ import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import icon1 from '../../assets/Icon-1.svg';
 import icon4 from "../../assets/Icon-4.svg";
 
-const GiveawayFormSummary = ({props, handleSubmit}) => {
+const GiveawayFormSummary = ({props, handleSubmit, setSummaryPage, setFourthPage}) => {
     const [type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date,
         hour, comment] = props;
+
+    //move to previous step
+    const handlePrev = () => {
+        setSummaryPage(false);
+        setFourthPage(true);
+    };
 
     return (
             <div className={'giveaway__form'}>
@@ -58,7 +64,7 @@ const GiveawayFormSummary = ({props, handleSubmit}) => {
                 <div>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
-                        bottom:'7rem'}}>Wstecz</FooterButtonStyled>
+                        bottom:'7rem'}} onClick={handlePrev}>Wstecz</FooterButtonStyled>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
