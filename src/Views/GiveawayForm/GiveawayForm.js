@@ -13,17 +13,18 @@ import GiveawayFormPage2 from "./GiveawayForm_page2";
 import GiveawayFormSummary from "./GiveawayForm_summary";
 
 const GiveawayForm = () => {
-    const [type, setType] = useState();
-    const [bags, setBags] = useState();
-    const [localization, setLocalization] = useState();
-    const [helpGroup, setHelpGroup] = useState();
-    const [street, setStreet] = useState();
-    const [city, setCity] = useState();
-    const [postCode, setPostCode] = useState();
-    const [phone, setPhone] = useState();
-    const [date, setDate] = useState();
-    const [hour, setHour] = useState();
-    const [comment, setComment] = useState();
+    const [type, setType] = useState('');
+    const [bags, setBags] = useState('');
+    const [localization, setLocalization] = useState('');
+    const [helpGroup, setHelpGroup] = useState('');
+    const [helpGroupOption, setHelpGroupOption]=useState('');
+    const [street, setStreet] = useState('');
+    const [city, setCity] = useState('');
+    const [postCode, setPostCode] = useState('');
+    const [phone, setPhone] = useState('');
+    const [date, setDate] = useState('');
+    const [hour, setHour] = useState('');
+    const [comment, setComment] = useState('');
 
     const props = [type, bags, localization, helpGroup, street, city, postCode, phone, date, hour, comment];
 
@@ -41,6 +42,11 @@ const GiveawayForm = () => {
 
     const handleHelpGroup = (e) => {
         setHelpGroup(e.target.value)
+    };
+
+    const handleHelpGroupOption = (e) => {
+        const tempHelpGroup = e.target.value;
+        setHelpGroupOption(tempHelpGroup)
     };
 
     const handleStreet = (e) => {
@@ -88,13 +94,13 @@ const GiveawayForm = () => {
                 <div className={'giveaway__nav_field'}>
                     <nav>
                         <div className={'nav__field'}>
-                            <LinkStyled style={{fontWeight: 300}} to={'/logowanie'}>
-                                <p className={'sign_in'}>Zaloguj</p>
-                            </LinkStyled>
-                            <LinkStyled to={'/rejestracja'}>
-                                <ButtonStyled className={'sign_in'}>
-                                    Załóż Konto
+                            <LinkStyled to={'/giveaway'}>
+                                <ButtonStyled className={'sign_in'} style={{width:'6rem'}}>
+                                    Oddaj rzeczy
                                 </ButtonStyled>
+                            </LinkStyled>
+                            <LinkStyled style={{fontWeight: 300}} to={'/wyloguj'}>
+                                <p className={'sign_in'} style={{marginRight:'.6875rem'}}>Wyloguj</p>
                             </LinkStyled>
                         </div>
                         <div>
@@ -136,7 +142,8 @@ const GiveawayForm = () => {
             <GiveawayFormPage1 handleCheckType={handleCheckType}/>
             <GiveawayFormPage2 handleBagsNumber={handleBagsNumber} bags={bags}/>
             <GiveawayFormPage3 handleLocalization={handleLocalization} localization={localization}
-            handleHelpGroup={handleHelpGroup}/>
+            handleHelpGroup={handleHelpGroup} helpGroup={helpGroup} option={helpGroupOption}
+            handleOption={handleHelpGroupOption}/>
             <GiveawayFormPage4 functions={functions} props={props}/>
             <GiveawayFormSummary props={props}/>
             <GiveawayForm_thank_you />

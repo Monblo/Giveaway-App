@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 
-const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup}) => {
+const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, helpGroup, option,
+                               handleOption}) => {
 
     return (
         <div>
@@ -24,15 +25,15 @@ const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup}) 
                         </select>
                 </div>
                 <h3>Komu chcesz pomóc?</h3>
-                <ul className={'list__help_groups'}>
-                    <li tabIndex='0' value='dzieciom' onClick={handleHelpGroup}>dzieciom</li>
-                    <li tabIndex='0' value='samotnym matkom' onClick={handleHelpGroup}>samotnym matkom</li>
-                    <li tabIndex='0' value='bezdomnym' onClick={handleHelpGroup}>bezdomnym</li>
-                    <li tabIndex='0' value='niepełnosprawnym' onClick={handleHelpGroup}>niepełnosprawnym</li>
-                    <li tabIndex='0' value='osobom starszym' onClick={handleHelpGroup}>osobom starszym</li>
-                </ul>
+                <div className={'list__help_groups'}>
+                    <button value='dzieciom' onClick={handleHelpGroup}>dzieciom</button>
+                    <button value='samotnym matkom' onClick={handleHelpGroup}>samotnym matkom</button>
+                    <button value='bezdomnym' onClick={handleHelpGroup}>bezdomnym</button>
+                    <button value='niepełnosprawnym' onClick={handleHelpGroup}>niepełnosprawnym</button>
+                    <button value='osobom starszym' onClick={handleHelpGroup}>osobom starszym</button>
+                </div>
                 <label>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
-                <input className={'input__localization'} type='text'/>
+                <input className={'input__localization'} type='text' value={option} onChange={handleOption}/>
                 <div>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
