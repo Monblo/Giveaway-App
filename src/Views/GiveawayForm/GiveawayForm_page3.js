@@ -4,6 +4,20 @@ import {FooterButtonStyled} from "../../components/Button/Button.styles";
 const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, helpGroup, option,
                                handleOption}) => {
 
+    const [helpGroupError, setHelpGroupError] = useState();
+
+    const handleSubmit = () => {
+        if (helpGroup === ''){setHelpGroupError('Musisz wybrać jedną grupę!')
+        } else {setHelpGroupError(null)}
+    };
+
+    const style = {
+        color: 'red',
+        fontSize: '.8rem',
+        fontWeight: '700',
+        width: '20rem'
+    };
+
     return (
         <div>
             <div className={'alert__field'}>
@@ -31,6 +45,7 @@ const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, h
                     <button value='bezdomnym' onClick={handleHelpGroup}>bezdomnym</button>
                     <button value='niepełnosprawnym' onClick={handleHelpGroup}>niepełnosprawnym</button>
                     <button value='osobom starszym' onClick={handleHelpGroup}>osobom starszym</button>
+                    {helpGroupError ? <p style={style}>{helpGroupError}</p> : ''}
                 </div>
                 <label>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
                 <input className={'input__localization'} type='text' value={option} onChange={handleOption}/>
@@ -41,7 +56,7 @@ const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, h
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}}>Dalej</FooterButtonStyled>
+                        left: '12rem'}} onClick={handleSubmit}>Dalej</FooterButtonStyled>
                 </div>
             </div>
         </div>

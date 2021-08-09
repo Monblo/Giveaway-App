@@ -26,7 +26,7 @@ const GiveawayForm = () => {
     const [hour, setHour] = useState('');
     const [comment, setComment] = useState('');
 
-    const props = [type, bags, localization, helpGroup, street, city, postCode, phone, date, hour, comment];
+    const props = [type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date, hour, comment];
 
     const handleCheckType = (e) => {
         setType(e.target.value)

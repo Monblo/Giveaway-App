@@ -4,7 +4,8 @@ import icon1 from '../../assets/Icon-1.svg';
 import icon4 from "../../assets/Icon-4.svg";
 
 const GiveawayFormSummary = ({props}) => {
-    const [type, bags, localization, helpGroup, street, city, postCode, phone, date, hour, comment] = props;
+    const [type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date,
+        hour, comment] = props;
 
     return (
             <div className={'giveaway__form'}>
@@ -16,7 +17,7 @@ const GiveawayFormSummary = ({props}) => {
                 </div>
                 <div className={'summary__icon'}>
                     <img src={icon4}/>
-                    <p>dla lokalizacji: {localization}</p>
+                    <p>dla lokalizacji: {localization} {helpGroupOption}</p>
                 </div>
                 <div className={'input__data'}>
                     <div className={'input__address'}>
