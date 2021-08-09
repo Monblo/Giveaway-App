@@ -39,9 +39,11 @@ const GiveawayFormPage1 = ({handleCheckType}) => {
                     <span className={'checkmark'}/>
                     inne
                 </label>
+                <div>
                 <FooterButtonStyled style={{backgroundColor:'transparent',
                     position:'absolute',
                     bottom:'7rem'}}>Dalej</FooterButtonStyled>
+                </div>
             </div>
         </div>
     );
