@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
+import {GiveawayContext} from "./GiveawayForm";
 
-const GiveawayFormPage1 = ({handleCheckType, setFirstPage, setSecondPage}) => {
+const GiveawayFormPage1 = ({setFirstPage, setSecondPage}) => {
+    const context = useContext(GiveawayContext);
+    const {handleCheck} = context;
 
     //move to next step
     const handleNext = () => {
@@ -20,28 +23,32 @@ const GiveawayFormPage1 = ({handleCheckType, setFirstPage, setSecondPage}) => {
                 <p>Krok 1/4</p>
                 <h2>Zaznacz co chcesz oddać:</h2>
                 <label className={'checkbox'}>
-                    <input type='checkbox' value='ubrania, które nadają sie do ponownego użycia'
-                    onChange={handleCheckType}/>
+                    <input type='checkbox' value='ubrania, które nadają sie do ponownego użycia' name='type'
+                    onChange={handleCheck}/>
                     <span className={'checkmark'}/>
                     ubrania, które nadają sie do ponownego użycia
                 </label>
                 <label className={'checkbox'}>
-                    <input type='checkbox' value='ubrania, do wyrzucenia' onChange={handleCheckType}/>
+                    <input type='checkbox' value='ubrania, do wyrzucenia' name='type'
+                           onChange={handleCheck}/>
                     <span className={'checkmark'}/>
                     ubrania, do wyrzucenia
                 </label>
                 <label className={'checkbox'}>
-                    <input type='checkbox' value='zabawki' onChange={handleCheckType}/>
+                    <input type='checkbox' value='zabawki' name='type'
+                           onChange={handleCheck}/>
                     <span className={'checkmark'}/>
                     zabawki
                 </label>
                 <label className={'checkbox'}>
-                    <input type='checkbox' value='książki' onChange={handleCheckType}/>
+                    <input type='checkbox' value='książki' name='type'
+                           onChange={handleCheck}/>
                     <span className={'checkmark'}/>
                     książki
                 </label>
                 <label className={'checkbox'}>
-                    <input type='checkbox' value='inne' onChange={handleCheckType}/>
+                    <input type='checkbox' value='inne' name='type'
+                           onChange={handleCheck}/>
                     <span className={'checkmark'}/>
                     inne
                 </label>

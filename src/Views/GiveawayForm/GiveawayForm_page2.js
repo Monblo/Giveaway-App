@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
+import {GiveawayContext} from "./GiveawayForm";
 
-const GiveawayFormPage2 = ({handleBagsNumber, bags, setFirstPage, setSecondPage, setThirdPage}) => {
+const GiveawayFormPage2 = ({setFirstPage, setSecondPage, setThirdPage}) => {
+    const context = useContext(GiveawayContext);
+    const {bags, handleCheck} = context;
 
     //move to next step
     const handleNext = () => {
@@ -27,7 +30,7 @@ const GiveawayFormPage2 = ({handleBagsNumber, bags, setFirstPage, setSecondPage,
                 <h2>Podaj liczbę worków, w które spakowałeś/aś rzeczy:</h2>
                 <div className={'select__step2'}>
                     <p>Liczba 60l worków:</p>
-                        <select value={bags} onChange={handleBagsNumber}>
+                        <select value={bags} name='bags' onChange={handleCheck}>
                             <option className={'hidden'} value="0">-wybierz-</option>
                             <option className={'select__item'} value="1">1</option>
                             <option className={'select__item'} value="2">2</option>

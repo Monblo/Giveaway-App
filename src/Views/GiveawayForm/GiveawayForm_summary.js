@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import icon1 from '../../assets/Icon-1.svg';
 import icon4 from "../../assets/Icon-4.svg";
+import {GiveawayContext} from "./GiveawayForm";
 
-const GiveawayFormSummary = ({props, handleSubmit, setSummaryPage, setFourthPage}) => {
-    const [type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date,
-        hour, comment] = props;
+const GiveawayFormSummary = (setSummaryPage, setFourthPage) => {
+    const context = useContext(GiveawayContext);
+    const {type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date,
+        hour, comment, handleSubmit} = context;
 
     //move to previous step
     const handlePrev = () => {

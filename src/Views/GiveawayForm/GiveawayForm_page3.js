@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
+import {GiveawayContext} from "./GiveawayForm";
 
-const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, helpGroup, option,
-                               handleOption, setSecondPage, setThirdPage, setFourthPage}) => {
+const GiveawayFormPage3 = ({ setSecondPage, setThirdPage, setFourthPage}) => {
+    const context = useContext(GiveawayContext);
+    const {localization, helpGroup, option, handleCheck} = context;
 
     const [helpGroupError, setHelpGroupError] = useState();
 
@@ -38,7 +40,7 @@ const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, h
                 <p>Krok 3/4</p>
                 <h2>Lokalizacja:</h2>
                 <div className={'select__step2'}>
-                        <select value={localization} onChange={handleLocalization}>
+                        <select value={localization} name='localization' onChange={handleCheck}>
                             <option className={'hidden'} value="0">-wybierz-</option>
                             <option className={'select__item'} value="Poznań">Poznań</option>
                             <option className={'select__item'} value="Warszawa">Warszawa</option>
@@ -49,15 +51,16 @@ const GiveawayFormPage3 = ({handleLocalization, localization, handleHelpGroup, h
                 </div>
                 <h3>Komu chcesz pomóc?</h3>
                 <div className={'list__help_groups'}>
-                    <button value='dzieciom' onClick={handleHelpGroup}>dzieciom</button>
-                    <button value='samotnym matkom' onClick={handleHelpGroup}>samotnym matkom</button>
-                    <button value='bezdomnym' onClick={handleHelpGroup}>bezdomnym</button>
-                    <button value='niepełnosprawnym' onClick={handleHelpGroup}>niepełnosprawnym</button>
-                    <button value='osobom starszym' onClick={handleHelpGroup}>osobom starszym</button>
+                    <button value='dzieciom' name='helpGroup' onClick={handleCheck}>dzieciom</button>
+                    <button value='samotnym matkom' name='helpGroup' onClick={handleCheck}>samotnym matkom</button>
+                    <button value='bezdomnym' name='helpGroup' onClick={handleCheck}>bezdomnym</button>
+                    <button value='niepełnosprawnym' name='helpGroup' onClick={handleCheck}>niepełnosprawnym</button>
+                    <button value='osobom starszym' name='helpGroup' onClick={handleCheck}>osobom starszym</button>
                     {helpGroupError ? <p style={style}>{helpGroupError}</p> : ''}
                 </div>
                 <label>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
-                <input className={'input__localization'} type='text' value={option} onChange={handleOption}/>
+                <input className={'input__localization'} type='text' value={option} name='helpGroupOption'
+                       onChange={handleCheck}/>
                 <div>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',

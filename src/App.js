@@ -5,21 +5,25 @@ import NotFound from "./Views/NotFound";
 import SignUp from "./Views/SignUp/SignUp";
 import GiveawayForm from "./Views/GiveawayForm/GiveawayForm";
 import SignOut from "./Views/SignOut";
+import {ThemeProvider} from "styled-components";
+import {Theme} from "./Utils/Theme";
 
 function App() {
 
     return (
         <>
-            <HashRouter>
-                <Switch>
-                    <Route exact path='/' component={Home}/>
-                    <Route path='/logowanie' component={SignIn}/>
-                    <Route path='/rejestracja' component={SignUp}/>
-                    <Route path='/giveaway' component={GiveawayForm} />
-                    <Route path='/wyloguj' component={SignOut} />
-                    <Route path='/*' component={NotFound}/>
-                </Switch>
-            </HashRouter>
+            <ThemeProvider theme={Theme}>
+                <HashRouter>
+                    <Switch>
+                        <Route exact path='/' component={Home}/>
+                        <Route path='/logowanie' component={SignIn}/>
+                        <Route path='/rejestracja' component={SignUp}/>
+                        <Route path='/giveaway' component={GiveawayForm} />
+                        <Route path='/wyloguj' component={SignOut} />
+                        <Route path='/*' component={NotFound}/>
+                    </Switch>
+                </HashRouter>
+            </ThemeProvider>
         </>
     );
 }
