@@ -1,16 +1,17 @@
 import React, {useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
+import {LinkStyled} from "../../components/Link/Link.styles";
 
-const GiveawayFormPage1 = ({setFirstPage, setSecondPage}) => {
+const GiveawayFormPage1 = () => {
     const context = useContext(GiveawayContext);
     const {handleCheck} = context;
 
-    //move to next step
-    const handleNext = () => {
-        setFirstPage(false);
-        setSecondPage(true)
-    };
+    // //move to next step
+    // const handleNext = () => {
+    //     setFirstPage(false);
+    //     setSecondPage(true)
+    // };
 
     return (
         <div>
@@ -24,8 +25,8 @@ const GiveawayFormPage1 = ({setFirstPage, setSecondPage}) => {
                 <h2>Zaznacz co chcesz oddać:</h2>
                 <label className={'checkbox'}>
                     <input type='checkbox' value='ubrania, które nadają sie do ponownego użycia' name='type'
-                    onChange={handleCheck}/>
-                    <span className={'checkmark'}/>
+                    onChange={handleCheck} />
+                    <span className={'checkmark'} />
                     ubrania, które nadają sie do ponownego użycia
                 </label>
                 <label className={'checkbox'}>
@@ -36,7 +37,7 @@ const GiveawayFormPage1 = ({setFirstPage, setSecondPage}) => {
                 </label>
                 <label className={'checkbox'}>
                     <input type='checkbox' value='zabawki' name='type'
-                           onChange={handleCheck}/>
+                           onChange={handleCheck} />
                     <span className={'checkmark'}/>
                     zabawki
                 </label>
@@ -53,10 +54,12 @@ const GiveawayFormPage1 = ({setFirstPage, setSecondPage}) => {
                     inne
                 </label>
                 <div>
+                    <LinkStyled to={'/giveaway/2'}>
                 <FooterButtonStyled style={{backgroundColor:'transparent',
                     position:'absolute',
-                    bottom:'7rem'}}
-                onClick={handleNext}>Dalej</FooterButtonStyled>
+                    bottom:'7rem'}}>
+                    Dalej</FooterButtonStyled>
+                    </LinkStyled>
                 </div>
             </div>
         </div>

@@ -1,8 +1,9 @@
 import React, {useState, useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
+import {LinkStyled} from "../../components/Link/Link.styles";
 
-const GiveawayFormPage3 = ({ setSecondPage, setThirdPage, setFourthPage}) => {
+const GiveawayFormPage3 = () => {
     const context = useContext(GiveawayContext);
     const {localization, helpGroup, option, handleCheck} = context;
 
@@ -10,10 +11,7 @@ const GiveawayFormPage3 = ({ setSecondPage, setThirdPage, setFourthPage}) => {
 
     const handleSubmit = () => {
         if (helpGroup === ''){setHelpGroupError('Musisz wybrać jedną grupę!')
-        } else {setHelpGroupError(null);
-            setFourthPage(true);
-            setThirdPage(false);
-        }
+        } else {setHelpGroupError(null)}
     };
 
     const style = {
@@ -21,12 +19,6 @@ const GiveawayFormPage3 = ({ setSecondPage, setThirdPage, setFourthPage}) => {
         fontSize: '.8rem',
         fontWeight: '700',
         width: '20rem'
-    };
-
-    //move to previous step
-    const handlePrev = () => {
-        setThirdPage(false)
-        setSecondPage(true)
     };
 
     return (
@@ -62,13 +54,17 @@ const GiveawayFormPage3 = ({ setSecondPage, setThirdPage, setFourthPage}) => {
                 <input className={'input__localization'} type='text' value={option} name='helpGroupOption'
                        onChange={handleCheck}/>
                 <div>
+                    <LinkStyled to={'/giveaway/2'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
-                        bottom:'7rem'}} onClick={handlePrev}>Wstecz</FooterButtonStyled>
+                        bottom:'7rem'}} >Wstecz</FooterButtonStyled>
+                    </LinkStyled>
+                    <LinkStyled to={'/giveaway/4'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}} onClick={handleSubmit}>Dalej</FooterButtonStyled>
+                        left: '12rem'}} >Dalej</FooterButtonStyled>
+                    </LinkStyled>
                 </div>
             </div>
         </div>

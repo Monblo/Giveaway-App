@@ -1,22 +1,11 @@
 import React, {useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
+import {LinkStyled} from "../../components/Link/Link.styles";
 
-const GiveawayFormPage2 = ({setFirstPage, setSecondPage, setThirdPage}) => {
+const GiveawayFormPage2 = () => {
     const context = useContext(GiveawayContext);
     const {bags, handleCheck} = context;
-
-    //move to next step
-    const handleNext = () => {
-        setSecondPage(false);
-        setThirdPage(true)
-    };
-
-    //move to previous step
-    const handlePrev = () => {
-        setSecondPage(false);
-        setFirstPage(true)
-    };
 
     return (
         <div>
@@ -40,13 +29,17 @@ const GiveawayFormPage2 = ({setFirstPage, setSecondPage, setThirdPage}) => {
                         </select>
                     </div>
                 <div>
+                    <LinkStyled to={'/giveaway'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
-                        bottom:'7rem'}} onClick={handlePrev}>Wstecz</FooterButtonStyled>
+                        bottom:'7rem'}}>Wstecz</FooterButtonStyled>
+                    </LinkStyled>
+                    <LinkStyled to={'/giveaway/3'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}} onClick={handleNext}>Dalej</FooterButtonStyled>
+                        left: '12rem'}}>Dalej</FooterButtonStyled>
+                    </LinkStyled>
                 </div>
             </div>
         </div>

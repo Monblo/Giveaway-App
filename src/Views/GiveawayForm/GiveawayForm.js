@@ -13,6 +13,8 @@ import GiveawayFormPage2 from "./GiveawayForm_page2";
 import GiveawayFormSummary from "./GiveawayForm_summary";
 import {db} from "../../firebase";
 import {Theme} from "../../Utils/Theme";
+import {Route, Switch} from "react-router-dom";
+import GiveawayFormThankYou from "./GiveawayForm_thank_you";
 
 export const GiveawayContext = React.createContext({});
 
@@ -23,7 +25,7 @@ const GiveawayForm = () => {
         localization:'',
         helpGroup:'',
         helpGroupOption:'',
-        color: (Theme.colors.firstSectionColor),
+        // color: ''
     });
 
     const [address, setAddress] = useState({
@@ -36,16 +38,15 @@ const GiveawayForm = () => {
         comment:''
     });
 
-    const [firstPage, setFirstPage] = useState(true);
-    const [secondPage, setSecondPage] = useState(false);
-    const [thirdPage, setThirdPage] = useState(false);
-    const [fourthPage, setFourthPage] = useState(false);
-    const [summaryPage, setSummaryPage] = useState(false);
-    const [thankyouPage, setThankyouPage] = useState(false);
-
     const handleCheck = (e) => {
         const name = e.target.name;
         setData({...data, [name]: e.target.value})
+
+        // if (e.target.style.backgroundColor === 'transparent'){
+        //     setData({color: Theme.colors.firstSectionColor});
+        //     e.target.style.backgroundColor = data.color
+        // } else {setData({color: 'transparent'});
+        //     e.target.style.backgroundColor = 'transparent'}
     };
 
     const handleInput = (e) => {
@@ -74,11 +75,9 @@ const GiveawayForm = () => {
             .catch(err => console.log(err))
     };
 
-    //submit giveaway form and send data to firestore
+    //submit giveaway form and send data to firestore & clear state
     const handleSubmit = () => {
         addNewGiveawayData();
-        setSummaryPage(false);
-        setThankyouPage(true);
         const tempData = {
             type:'',
             bags:'',
@@ -102,6 +101,7 @@ const GiveawayForm = () => {
     return (
         <GiveawayContext.Provider value={{...data, ...address, handleCheck, handleInput,
             handleSubmit}}>
+            {/*<HashRouter>*/}
             <div>
                 <div className={'giveaway__field'}>
                     <ImgGiveaway />
@@ -153,23 +153,17 @@ const GiveawayForm = () => {
                         </div>
                     </div>
                 </div>
-                {firstPage && <GiveawayFormPage1 setFirstPage={setFirstPage}
-                setSecondPage={setSecondPage}/>}
-
-                {secondPage && <GiveawayFormPage2 setFirstPage={setFirstPage} setSecondPage={setSecondPage}
-                                                  setThirdPage={setThirdPage} />}
-
-                {thirdPage && <GiveawayFormPage3 setSecondPage={setSecondPage} setThirdPage={setThirdPage}
-                setFourthPage={setFourthPage}/>}
-
-                {fourthPage && <GiveawayFormPage4 setThirdPage={setThirdPage} setFourthPage={setFourthPage}
-                                                  setSummaryPage={setSummaryPage}/>}
-
-                {summaryPage && <GiveawayFormSummary setFourthPage={setFourthPage} setSummaryPage={setSummaryPage}/>}
-
-                {thankyouPage && <GiveawayForm_thank_you />}
+                <Switch>
+                        <Route exact path='/giveaway' component={GiveawayFormPage1}/>
+                        <Route path='/giveaway/2' component={GiveawayFormPage2}/>
+                        <Route path='/giveaway/3' component={GiveawayFormPage3}/>
+                        <Route path='/giveaway/4' component={GiveawayFormPage4}/>
+                        <Route path='/giveaway/summary' component={GiveawayFormSummary}/>
+                    <Route path='/giveaway/thankyou' component={GiveawayFormThankYou}/>
+                </Switch>
                 <Footer />
             </div>
+            {/*</HashRouter>*/}
         </GiveawayContext.Provider>
     );
 };

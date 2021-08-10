@@ -1,8 +1,9 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
+import {LinkStyled} from "../../components/Link/Link.styles";
 
-const GiveawayFormPage4 = ({setFourthPage, setSummaryPage, setThirdPage}) => {
+const GiveawayFormPage4 = () => {
 
     const context = useContext(GiveawayContext);
     const {street, city, postCode, phone, date, hour, comment, handleInput} = context;
@@ -33,24 +34,15 @@ const GiveawayFormPage4 = ({setFourthPage, setSummaryPage, setThirdPage}) => {
         } else {setHourError('Niepoprawna godzina')}
     };
 
-    useEffect(()=> {
-        if (streetError === null && cityError === null && postCodeError === null && phoneError === null &&
-            hourError === null){
-            setFourthPage(false);
-            setSummaryPage(true);
-        }
-    }, [streetError, cityError, postCodeError, phoneError, hourError]);
+    // useEffect(()=> {
+    //     if (streetError === null && cityError === null && postCodeError === null && phoneError === null &&
+    //         hourError === null)
+    // }, [streetError, cityError, postCodeError, phoneError, hourError]);
 
     const style = {
         color: 'red',
         fontSize: '.8rem',
         fontWeight: '700'
-    };
-
-    //move to previous step
-    const handlePrev = () => {
-        setFourthPage(false);
-        setThirdPage(true);
     };
 
     return (
@@ -105,13 +97,17 @@ const GiveawayFormPage4 = ({setFourthPage, setSummaryPage, setThirdPage}) => {
                     </div>
                 </div>
                 <div>
+                    <LinkStyled to={'/giveaway/3'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
-                        bottom:'7rem'}} onClick={handlePrev}>Wstecz</FooterButtonStyled>
+                        bottom:'7rem'}}>Wstecz</FooterButtonStyled>
+                    </LinkStyled>
+                    <LinkStyled to={'/giveaway/summary'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}} onClick={handleSubmit}>Dalej</FooterButtonStyled>
+                        left: '12rem'}}>Dalej</FooterButtonStyled>
+                    </LinkStyled>
                 </div>
             </div>
         </div>

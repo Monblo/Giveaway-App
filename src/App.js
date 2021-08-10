@@ -5,14 +5,10 @@ import NotFound from "./Views/NotFound";
 import SignUp from "./Views/SignUp/SignUp";
 import GiveawayForm from "./Views/GiveawayForm/GiveawayForm";
 import SignOut from "./Views/SignOut";
-import {ThemeProvider} from "styled-components";
-import {Theme} from "./Utils/Theme";
-
 function App() {
 
     return (
         <>
-            <ThemeProvider theme={Theme}>
                 <HashRouter>
                     <Switch>
                         <Route exact path='/' component={Home}/>
@@ -23,7 +19,6 @@ function App() {
                         <Route path='/*' component={NotFound}/>
                     </Switch>
                 </HashRouter>
-            </ThemeProvider>
         </>
     );
 }

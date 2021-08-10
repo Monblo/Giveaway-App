@@ -3,17 +3,12 @@ import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import icon1 from '../../assets/Icon-1.svg';
 import icon4 from "../../assets/Icon-4.svg";
 import {GiveawayContext} from "./GiveawayForm";
+import {LinkStyled} from "../../components/Link/Link.styles";
 
-const GiveawayFormSummary = (setSummaryPage, setFourthPage) => {
+const GiveawayFormSummary = () => {
     const context = useContext(GiveawayContext);
     const {type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date,
         hour, comment, handleSubmit} = context;
-
-    //move to previous step
-    const handlePrev = () => {
-        setSummaryPage(false);
-        setFourthPage(true);
-    };
 
     return (
             <div className={'giveaway__form'}>
@@ -64,13 +59,17 @@ const GiveawayFormSummary = (setSummaryPage, setFourthPage) => {
                     </div>
                 </div>
                 <div>
+                    <LinkStyled to={'/giveaway/4'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
-                        bottom:'7rem'}} onClick={handlePrev}>Wstecz</FooterButtonStyled>
+                        bottom:'7rem'}}>Wstecz</FooterButtonStyled>
+                    </LinkStyled>
+                    <LinkStyled to={'/giveaway/thankyou'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
                         left: '12rem'}} onClick={handleSubmit}>Potwierdzam</FooterButtonStyled>
+                    </LinkStyled>
                 </div>
             </div>
     );

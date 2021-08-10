@@ -28,10 +28,6 @@
     width: 0;
   }
 
-  input:checked + span {
-    background-color: $first-section-color;
-  }
-
   .checkmark {
     height: 1.5rem;
     width: 1.5rem;
@@ -174,10 +170,6 @@
     border: 1px solid $dark-color;
     cursor: pointer;
     background-color: transparent;
-
-    &:focus {
-      background-color: $first-section-color;
-    }
   }
 }
 
