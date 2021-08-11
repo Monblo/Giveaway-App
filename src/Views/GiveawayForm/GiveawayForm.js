@@ -109,8 +109,10 @@ const GiveawayForm = () => {
         setAddress(tempAddress)
     };
 
+    console.log(data)
+
     return (
-        <GiveawayContext.Provider value={{...data, ...address, ...colors, handleColor, handleCheck, handleInput,
+        <GiveawayContext.Provider value={{...data, ...address, ...colors, setData, handleColor, handleCheck, handleInput,
             handleSubmit}}>
             <div>
                 <div className={'giveaway__field'}>

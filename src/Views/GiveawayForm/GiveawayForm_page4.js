@@ -7,13 +7,13 @@ const GiveawayFormPage4 = () => {
 
     const context = useContext(GiveawayContext);
     const {street, city, postCode, phone, date, hour, comment, handleInput} = context;
-    console.log(context)
 
     const [streetError, setStreetError] = useState();
     const [cityError, setCityError] = useState();
     const [postCodeError, setPostCodeError] = useState();
     const [phoneError, setPhoneError] = useState();
     const [hourError, setHourError] = useState();
+    const [isError, setIsError] = useState();
 
     const handleSubmit = () => {
         if (street.length < 2){setStreetError('Niepoprawna nazwa ulicy')
@@ -34,10 +34,14 @@ const GiveawayFormPage4 = () => {
         } else {setHourError('Niepoprawna godzina')}
     };
 
-    // useEffect(()=> {
-    //     if (streetError === null && cityError === null && postCodeError === null && phoneError === null &&
-    //         hourError === null)
-    // }, [streetError, cityError, postCodeError, phoneError, hourError]);
+    useEffect(()=> {
+        if (streetError === null && cityError === null && postCodeError === null && phoneError === null &&
+            hourError === null){
+            setIsError(false)
+        } else {
+            setIsError(true)
+        }
+    }, [streetError, cityError, postCodeError, phoneError, hourError]);
 
     const style = {
         color: 'red',
@@ -61,22 +65,22 @@ const GiveawayFormPage4 = () => {
                             <label>Ulica</label>
                             <input type='text' value={street} name='street' onChange={handleInput}/>
                         </div>
-                        {streetError ? <p style={style}>{streetError}</p> : ''}
+                        {streetError && <p style={style}>{streetError}</p>}
                         <div className={'input__address__element'}>
                             <label>Miasto</label>
                             <input type='text' value={city} name='city' onChange={handleInput}/>
                         </div>
-                        {cityError ? <p style={style}>{cityError}</p> : ''}
+                        {cityError && <p style={style}>{cityError}</p>}
                         <div className={'input__address__element'}>
                             <label>Kod pocztowy</label>
                             <input type='text' value={postCode} name='postCode' onChange={handleInput}/>
                         </div>
-                        {postCodeError ? <p style={style}>{postCodeError}</p> : ''}
+                        {postCodeError && <p style={style}>{postCodeError}</p>}
                         <div className={'input__address__element'}>
                             <label>Numer telefonu</label>
                             <input type='text' value={phone} name='phone' onChange={handleInput}/>
                         </div>
-                        {phoneError ? <p style={style}>{phoneError}</p> : ''}
+                        {phoneError && <p style={style}>{phoneError}</p>}
                     </div>
                     <div className={'input__address'}>
                         <h3>Termin odbioru:</h3>
@@ -88,7 +92,7 @@ const GiveawayFormPage4 = () => {
                             <label>Godzina</label>
                             <input type='text' value={hour} name='hour' onChange={handleInput}/>
                         </div>
-                        {hourError ? <p style={style}>{hourError}</p> : ''}
+                        {hourError && <p style={style}>{hourError}</p>}
                         <div className={'input__address__element'}>
                             <label className={'label__supplier'}>Uwagi <br/>dla kuriera</label>
                             <textarea className={'input__supplier'} value={comment} name='comment'
@@ -102,11 +106,11 @@ const GiveawayFormPage4 = () => {
                         position:'absolute',
                         bottom:'7rem'}}>Wstecz</FooterButtonStyled>
                     </LinkStyled>
-                    <LinkStyled to={'/giveaway/summary'}>
+                    <LinkStyled to={isError === false && '/giveaway/summary'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}}>Dalej</FooterButtonStyled>
+                        left: '12rem'}} onClick={handleSubmit}>Dalej</FooterButtonStyled>
                     </LinkStyled>
                 </div>
             </div>

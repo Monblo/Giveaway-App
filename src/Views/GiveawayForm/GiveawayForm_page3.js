@@ -1,18 +1,30 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
 import {LinkStyled} from "../../components/Link/Link.styles";
+import SelectLocalization from "../../components/SelectLocalization/SelectLocalization";
 
 const GiveawayFormPage3 = () => {
     const context = useContext(GiveawayContext);
-    const {group1, group2, group3, group4, group5, localization, helpGroup, option, handleColor, handleCheck} = context;
+    const {group1, group2, group3, group4, group5, helpGroup, option, handleColor, handleCheck} = context;
 
     const [helpGroupError, setHelpGroupError] = useState();
+    const [isError, setIsError] = useState();
 
     const handleSubmit = () => {
         if (helpGroup === ''){setHelpGroupError('Musisz wybrać jedną grupę!')
         } else {setHelpGroupError(null)}
     };
+
+    useEffect(() => {
+        if (helpGroupError === null){
+            setIsError(false)
+        } else {
+            setIsError(true)
+        }
+    }, [helpGroupError, helpGroup]);
+
+    console.log(isError, helpGroupError)
 
     const style = {
         color: 'red',
@@ -32,14 +44,7 @@ const GiveawayFormPage3 = () => {
                 <p>Krok 3/4</p>
                 <h2>Lokalizacja:</h2>
                 <div className={'select__step2'}>
-                        <select value={localization} name='localization' onChange={handleCheck}>
-                            <option className={'hidden'} value="0">-wybierz-</option>
-                            <option className={'select__item'} value="Poznań">Poznań</option>
-                            <option className={'select__item'} value="Warszawa">Warszawa</option>
-                            <option className={'select__item'} value="Kraków">Kraków</option>
-                            <option className={'select__item'} value="Wrocław">Wrocław</option>
-                            <option className={'select__item'} value="Katowice">Katowice</option>
-                        </select>
+                    <SelectLocalization/>
                 </div>
                 <h3>Komu chcesz pomóc?</h3>
                 <div className={'list__help_groups'}>
@@ -77,7 +82,7 @@ const GiveawayFormPage3 = () => {
                         osobom starszym
                         </span>
                     </label>
-                    {helpGroupError ? <p style={style}>{helpGroupError}</p> : ''}
+                    {helpGroupError && <p style={style}>{helpGroupError}</p>}
                 </div>
                 <label>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
                 <input className={'input__localization'} type='text' value={option} name='helpGroupOption'
@@ -88,11 +93,11 @@ const GiveawayFormPage3 = () => {
                         position:'absolute',
                         bottom:'7rem'}} >Wstecz</FooterButtonStyled>
                     </LinkStyled>
-                    <LinkStyled to={'/giveaway/4'}>
+                    <LinkStyled to={isError === false && '/giveaway/4'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}} >Dalej</FooterButtonStyled>
+                        left: '12rem'}} onClick={handleSubmit}>Dalej</FooterButtonStyled>
                     </LinkStyled>
                 </div>
             </div>
