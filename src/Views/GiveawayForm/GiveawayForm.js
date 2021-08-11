@@ -7,7 +7,6 @@ import decoration from "../../assets/Decoration.svg";
 import Footer from "../../components/Footer/Footer";
 import GiveawayFormPage3 from "./GiveawayForm_page3";
 import GiveawayFormPage4 from "./GiveawayForm_page4";
-import GiveawayForm_thank_you from "./GiveawayForm_thank_you";
 import GiveawayFormPage1 from "./GiveawayForm_page1";
 import GiveawayFormPage2 from "./GiveawayForm_page2";
 import GiveawayFormSummary from "./GiveawayForm_summary";
@@ -24,8 +23,7 @@ const GiveawayForm = () => {
         bags:'',
         localization:'',
         helpGroup:'',
-        helpGroupOption:'',
-        // color: ''
+        helpGroupOption:''
     });
 
     const [address, setAddress] = useState({
@@ -38,15 +36,28 @@ const GiveawayForm = () => {
         comment:''
     });
 
+    const [colors, setColors] = useState({
+        type1: 'transparent',
+        type2: 'transparent',
+        type3: 'transparent',
+        type4: 'transparent',
+        type5: 'transparent',
+        group1: 'transparent',
+        group2: 'transparent',
+        group3: 'transparent',
+        group4: 'transparent',
+        group5: 'transparent',
+    });
+
+    //change color of checked item
+    const handleColor = (e) => {
+        const name = e.target.id;
+        setColors({...colors, [name]: Theme.colors.firstSectionColor});
+    };
+
     const handleCheck = (e) => {
         const name = e.target.name;
         setData({...data, [name]: e.target.value})
-
-        // if (e.target.style.backgroundColor === 'transparent'){
-        //     setData({color: Theme.colors.firstSectionColor});
-        //     e.target.style.backgroundColor = data.color
-        // } else {setData({color: 'transparent'});
-        //     e.target.style.backgroundColor = 'transparent'}
     };
 
     const handleInput = (e) => {
@@ -99,9 +110,8 @@ const GiveawayForm = () => {
     };
 
     return (
-        <GiveawayContext.Provider value={{...data, ...address, handleCheck, handleInput,
+        <GiveawayContext.Provider value={{...data, ...address, ...colors, handleColor, handleCheck, handleInput,
             handleSubmit}}>
-            {/*<HashRouter>*/}
             <div>
                 <div className={'giveaway__field'}>
                     <ImgGiveaway />
@@ -163,7 +173,6 @@ const GiveawayForm = () => {
                 </Switch>
                 <Footer />
             </div>
-            {/*</HashRouter>*/}
         </GiveawayContext.Provider>
     );
 };

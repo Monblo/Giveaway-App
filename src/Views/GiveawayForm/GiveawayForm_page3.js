@@ -5,7 +5,7 @@ import {LinkStyled} from "../../components/Link/Link.styles";
 
 const GiveawayFormPage3 = () => {
     const context = useContext(GiveawayContext);
-    const {localization, helpGroup, option, handleCheck} = context;
+    const {group1, group2, group3, group4, group5, localization, helpGroup, option, handleColor, handleCheck} = context;
 
     const [helpGroupError, setHelpGroupError] = useState();
 
@@ -43,11 +43,40 @@ const GiveawayFormPage3 = () => {
                 </div>
                 <h3>Komu chcesz pomóc?</h3>
                 <div className={'list__help_groups'}>
-                    <button value='dzieciom' name='helpGroup' onClick={handleCheck}>dzieciom</button>
-                    <button value='samotnym matkom' name='helpGroup' onClick={handleCheck}>samotnym matkom</button>
-                    <button value='bezdomnym' name='helpGroup' onClick={handleCheck}>bezdomnym</button>
-                    <button value='niepełnosprawnym' name='helpGroup' onClick={handleCheck}>niepełnosprawnym</button>
-                    <button value='osobom starszym' name='helpGroup' onClick={handleCheck}>osobom starszym</button>
+                    <label className={'checkbox'}>
+                        <input type='checkbox' value='dzieciom' name='helpGroup' onChange={handleCheck} />
+                        <span className={'help_group'} id='group1'
+                              style={{backgroundColor: group1}} onClick={handleColor}>
+                            dzieciom </span>
+                    </label>
+                    <label className={'checkbox'}>
+                        <input type='checkbox' value='samotnym matkom' name='helpGroup' onClick={handleCheck} />
+                        <span className={'help_group'} id='group2'
+                              style={{backgroundColor: group2}} onClick={handleColor}>
+                        samotnym matkom
+                        </span>
+                    </label>
+                    <label className={'checkbox'}>
+                        <input type='checkbox' value='bezdomnym' name='helpGroup' onClick={handleCheck} />
+                        <span className={'help_group'} id='group3'
+                              style={{backgroundColor: group3}} onClick={handleColor}>
+                        bezdomnym
+                        </span>
+                    </label>
+                    <label className={'checkbox'}>
+                        <input type='checkbox' value='niepełnosprawnym' name='helpGroup' onClick={handleCheck} />
+                        <span className={'help_group'} id='group4'
+                              style={{backgroundColor: group4}} onClick={handleColor}>
+                        bezdomnym
+                        </span>
+                    </label>
+                    <label className={'checkbox'}>
+                        <input type='checkbox' value='osobom starszym' name='helpGroup' onClick={handleCheck} />
+                        <span className={'help_group'} id='group5'
+                              style={{backgroundColor: group5}} onClick={handleColor}>
+                        osobom starszym
+                        </span>
+                    </label>
                     {helpGroupError ? <p style={style}>{helpGroupError}</p> : ''}
                 </div>
                 <label>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>

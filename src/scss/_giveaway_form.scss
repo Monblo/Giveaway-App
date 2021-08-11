@@ -36,6 +36,7 @@
     cursor: pointer;
     margin-right: 1rem;
   }
+
 }
 
 .giveaway__field {
@@ -164,12 +165,18 @@
   flex-wrap: wrap;
   width: 31.25rem;
 
-  button {
-    padding: .6rem 1rem;
-    margin: .5rem .5rem .5rem 0;
-    border: 1px solid $dark-color;
-    cursor: pointer;
-    background-color: transparent;
+  .checkbox {
+    position: relative;
+    display: flex;
+    margin: .5rem 0;
+
+    .help_group {
+      padding: .5rem 1rem;
+      background-color: transparent;
+      border: 1px solid $dark-color;
+      cursor: pointer;
+      margin: 0 1rem 0 0;
+    }
   }
 }
 

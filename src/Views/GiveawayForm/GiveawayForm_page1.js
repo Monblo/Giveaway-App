@@ -5,13 +5,7 @@ import {LinkStyled} from "../../components/Link/Link.styles";
 
 const GiveawayFormPage1 = () => {
     const context = useContext(GiveawayContext);
-    const {handleCheck} = context;
-
-    // //move to next step
-    // const handleNext = () => {
-    //     setFirstPage(false);
-    //     setSecondPage(true)
-    // };
+    const {type1, type2, type3, type4, type5, handleColor, handleCheck} = context;
 
     return (
         <div>
@@ -26,31 +20,36 @@ const GiveawayFormPage1 = () => {
                 <label className={'checkbox'}>
                     <input type='checkbox' value='ubrania, które nadają sie do ponownego użycia' name='type'
                     onChange={handleCheck} />
-                    <span className={'checkmark'} />
+                    <span className={'checkmark'} id='type1'
+                          style={{backgroundColor: type1}} onClick={handleColor}/>
                     ubrania, które nadają sie do ponownego użycia
                 </label>
                 <label className={'checkbox'}>
                     <input type='checkbox' value='ubrania, do wyrzucenia' name='type'
                            onChange={handleCheck}/>
-                    <span className={'checkmark'}/>
+                    <span className={'checkmark'} id='type2'
+                          style={{backgroundColor: type2}} onClick={handleColor}/>
                     ubrania, do wyrzucenia
                 </label>
                 <label className={'checkbox'}>
                     <input type='checkbox' value='zabawki' name='type'
                            onChange={handleCheck} />
-                    <span className={'checkmark'}/>
+                    <span className={'checkmark'} id='type3'
+                          style={{backgroundColor: type3}} onClick={handleColor}/>
                     zabawki
                 </label>
                 <label className={'checkbox'}>
                     <input type='checkbox' value='książki' name='type'
                            onChange={handleCheck}/>
-                    <span className={'checkmark'}/>
+                    <span className={'checkmark'} id='type4'
+                          style={{backgroundColor: type4}} onClick={handleColor}/>
                     książki
                 </label>
                 <label className={'checkbox'}>
                     <input type='checkbox' value='inne' name='type'
                            onChange={handleCheck}/>
-                    <span className={'checkmark'}/>
+                    <span className={'checkmark'} id='type5'
+                          style={{backgroundColor: type5}} onClick={handleColor}/>
                     inne
                 </label>
                 <div>
