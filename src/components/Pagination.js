@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 const Pagination = ({postPerPage, posts, changePage}) => {
     let pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(posts/postPerPage); i++){
+    for (let i = 1; i <= Math.ceil(posts / postPerPage); i++) {
         pageNumbers = [...pageNumbers, i]
     }
 

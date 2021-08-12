@@ -8,30 +8,52 @@ import {db} from "../../firebase";
 import {Theme} from "../../Utils/Theme";
 
 const Organizations = () => {
-    const [section1, setSection1] = useState(true);
-    const [section2, setSection2] = useState(false);
-    const [section3, setSection3] = useState(false);
-    const [institutions, setInstitutions] = useState([]);
-    const [organizations, setOrganizations] = useState([]);
-    const [locals, setLocals] = useState([]);
+    const [section, setSection] = useState({
+        section1: true,
+        section2: false,
+        section3: false
+    });
+    const [institutions, setInstitutions] = useState({
+        fundations: [],
+        organizations: [],
+        locals: []
+    });
 
     //change the view
     const handleClick1 = () => {
-        setSection1(prev => !prev)
-        setSection2(false)
-        setSection3(false)
+        setSection(prev => {
+            return {...prev, section1: prevState => !prevState}
+        })
+        setSection(prev => {
+            return {...prev, section2: false}
+        })
+        setSection(prev => {
+            return {...prev, section3: false}
+        })
     };
 
     const handleClick2 = () => {
-        setSection2(prev => !prev)
-        setSection3(false)
-        setSection1(false)
+        setSection(prev => {
+            return {...prev, section2: prevState => !prevState}
+        })
+        setSection(prev => {
+            return {...prev, section3: false}
+        })
+        setSection(prev => {
+            return {...prev, section1: false}
+        })
     };
 
     const handleClick3 = () => {
-        setSection3(prev => !prev)
-        setSection2(false)
-        setSection1(false)
+        setSection(prev => {
+            return {...prev, section3: prevState => !prevState}
+        })
+        setSection(prev => {
+            return {...prev, section2: false}
+        })
+        setSection(prev => {
+            return {...prev, section1: false}
+        })
     };
 
     //get data from firestore to state
@@ -40,11 +62,13 @@ const Organizations = () => {
             .get()
             .then(promise => {
                 let items = []
-                promise.forEach( doc => {
+                promise.forEach(doc => {
                     const data = doc.data()
                     items = [...items, data]
                 })
-                setInstitutions(items)
+                setInstitutions(prev => {
+                    return {...prev, fundations: items}
+                })
             })
             .catch(error => console.log(error))
 
@@ -52,11 +76,13 @@ const Organizations = () => {
             .get()
             .then(promise => {
                 let items = []
-                promise.forEach( doc => {
+                promise.forEach(doc => {
                     const data = doc.data()
                     items = [...items, data]
                 })
-                setLocals(items)
+                setInstitutions(prev => {
+                    return {...prev, locals: items}
+                })
             })
             .catch(error => console.log(error))
 
@@ -64,11 +90,13 @@ const Organizations = () => {
             .get()
             .then(promise => {
                 let items = []
-                promise.forEach( doc => {
+                promise.forEach(doc => {
                     const data = doc.data()
                     items = [...items, data]
                 })
-                setOrganizations(items)
+                setInstitutions(prev => {
+                    return {...prev, organizations: items}
+                })
             })
             .catch(error => console.log(error))
     }, []);
@@ -84,18 +112,19 @@ const Organizations = () => {
     return (
         <div className={'organizations'} name='organizations'>
             <h2>Komu pomagamy?</h2>
-            <DecorationImg />
+            <DecorationImg/>
             <div className={'organizations__buttons'}>
-                {section1 ?  <OrganizationsButton onClick={handleClick1} style={styleOn}>Fundacjom
+                {section.section1 ? <OrganizationsButton onClick={handleClick1} style={styleOn}>Fundacjom
                 </OrganizationsButton> : <OrganizationsButton onClick={handleClick1} style={styleOff}>
                     Fundacjom</OrganizationsButton>}
                 <OrganizationsButton onClick={handleClick2}>Organizacjom Pozarządowym</OrganizationsButton>
                 <OrganizationsButton onClick={handleClick3}>Lokalnym Zbiórkom</OrganizationsButton>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            {section1 ? <OrganizationsSection1 institutions={institutions} /> : ''}
-            {section2 ? <OrganizationsSection2 organizations={organizations} /> : ''}
-            {section3 ? <Organizations_section3 locals={locals} /> : ''}
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam.</p>
+            {section.section1 ? <OrganizationsSection1 {...institutions} /> : ''}
+            {section.section2 ? <OrganizationsSection2 {...institutions} /> : ''}
+            {section.section3 ? <Organizations_section3 {...institutions} /> : ''}
         </div>
     );
 };
