@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
 import {LinkStyled} from "../../components/Link/Link.styles";
+import {Link} from "react-router-dom";
 
 const GiveawayFormPage4 = () => {
 
@@ -15,42 +16,44 @@ const GiveawayFormPage4 = () => {
         hourError: '',
         isError: ''
     });
-    const [isError, setIsError] = useState();
 
     const handleSubmit = () => {
-        if (street.length < 2){setError({street: 'Niepoprawna nazwa ulicy'})
-        } else {setError({street: null})}
-
-        if (city.length < 2){setError({city:'Niepoprawna nazwa miasta'})
-        } else {setError({city:null})}
-
-        const reg=/^[0-9]{2}(?:-[0-9]{3})?$/;
-        if (reg.test(postCode)){setError({postCode: null})
-        } else {setError({postCode: 'Niepoprawny kod pocztowy'})}
-
-        if (phone.length !== 9){setError({phone:'Niepoprawna nazwa ulicy'})
-        } else {setError({phone:null})}
-
-        const regTime = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/;
-        if (regTime.test(hour)){setError({hour: null})
-        } else {setError({hour: 'Niepoprawna godzina'})}
-
-        if (error.streetError !== null || error.cityError !== null || error.postCodeError !== null ||
-            error.phoneError !== null || error.hourError !== null){
-            setIsError(true)
-        } else {
-            setIsError(false)
+        const errorsTmp = {
+            streetError: null,
+            cityError: null,
+            postCodeError: null,
+            phoneError: null,
+            hourError: null,
+            isError: null
         }
-    };
 
-    // useEffect(()=> {
-    //     if (error.streetError !== null || error.cityError !== null || error.postCodeError !== null ||
-    //         error.phoneError !== null || error.hourError !== null){
-    //         setIsError(true)
-    //     } else {
-    //         setIsError(false)
-    //     }
-    // }, [error.streetError, error.cityError, error.postCodeError, error.phoneError, error.hourError]);
+        if (street.length < 2) {
+            errorsTmp.streetError = 'Niepoprawna nazwa ulicy'
+        }
+
+        if (city.length < 2) {
+            errorsTmp.cityError = 'Niepoprawna nazwa miasta'
+        }
+
+        if (/^[0-9]{2}(?:-[0-9]{3})?$/.test(postCode) === false) {
+            errorsTmp.postCodeError = 'Niepoprawny kod pocztowy'
+        }
+
+        if (phone.length !== 9) {
+            errorsTmp.phoneError = 'Niepoprawna nazwa ulicy'
+        }
+
+        if (/^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(hour) === false) {
+            errorsTmp.hourError = 'Niepoprawna godzina'
+        }
+
+        if (errorsTmp.streetError !== null || errorsTmp.cityError !== null || error.postCodeError !== null ||
+            error.phoneError !== null || error.hourError !== null){
+            errorsTmp.isError = false
+        }
+
+        setError(errorsTmp);
+    };
 
     const style = {
         color: 'red',
@@ -111,16 +114,20 @@ const GiveawayFormPage4 = () => {
                 </div>
                 <div>
                     <LinkStyled to={'/giveaway/3'}>
-                    <FooterButtonStyled style={{backgroundColor:'transparent',
-                        position:'absolute',
-                        bottom:'7rem'}}>Wstecz</FooterButtonStyled>
+                        <FooterButtonStyled style={{
+                            backgroundColor: 'transparent',
+                            position: 'absolute',
+                            bottom: '7rem'
+                        }}>Wstecz</FooterButtonStyled>
                     </LinkStyled>
-                    <LinkStyled to={isError === false ? '/giveaway/summary' : '/giveaway/4'}>
-                    <FooterButtonStyled style={{backgroundColor:'transparent',
-                        position:'absolute',
-                        bottom:'7rem',
-                        left: '12rem'}} >Dalej</FooterButtonStyled>
-                    </LinkStyled>
+                    <Link to={error.isError === false ? '/giveaway/summary' : '/giveaway/4'} replace>
+                        <FooterButtonStyled style={{
+                            backgroundColor: 'transparent',
+                            position: 'absolute',
+                            bottom: '7rem',
+                            left: '12rem'
+                        }} onClick={handleSubmit}>Dalej</FooterButtonStyled>
+                    </Link>
                 </div>
             </div>
         </div>
