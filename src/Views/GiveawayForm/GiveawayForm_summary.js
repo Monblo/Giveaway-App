@@ -7,7 +7,7 @@ import {LinkStyled} from "../../components/Link/Link.styles";
 
 const GiveawayFormSummary = () => {
     const context = useContext(GiveawayContext);
-    const {type, bags, localization, helpGroup, helpGroupOption, street, city, postCode, phone, date,
+    const {type, bags, localization, group1, group2, group3, group4, group5, helpGroupOption, street, city, postCode, phone, date,
         hour, comment, handleSubmit} = context;
 
     return (
@@ -16,7 +16,7 @@ const GiveawayFormSummary = () => {
                 <h3>Oddajesz:</h3>
                 <div className={'summary__icon'}>
                     <img src={icon1}/>
-                    <p>{bags} worki, {type}, {helpGroup}</p>
+                    <p>{bags} worki, {type}, {group1} {group2} {group3} {group4} {group5}</p>
                 </div>
                 <div className={'summary__icon'}>
                     <img src={icon4}/>

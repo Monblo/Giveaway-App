@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
 import {LinkStyled} from "../../components/Link/Link.styles";
@@ -7,7 +7,6 @@ const GiveawayFormPage4 = () => {
 
     const context = useContext(GiveawayContext);
     const {street, city, postCode, phone, date, hour, comment, handleInput} = context;
-
     const [error, setError] = useState({
         streetError: '',
         cityError: '',
@@ -35,16 +34,23 @@ const GiveawayFormPage4 = () => {
         const regTime = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/;
         if (regTime.test(hour)){setError({hour: null})
         } else {setError({hour: 'Niepoprawna godzina'})}
+
+        if (error.streetError !== null || error.cityError !== null || error.postCodeError !== null ||
+            error.phoneError !== null || error.hourError !== null){
+            setIsError(true)
+        } else {
+            setIsError(false)
+        }
     };
 
-    useEffect(()=> {
-        if (error.streetError === null && error.cityError === null && error.postCodeError === null &&
-            error.phoneError === null && error.hourError === null){
-            setIsError(false)
-        } else {
-            setIsError(true)
-        }
-    }, [error.streetError, error.cityError, error.postCodeError, error.phoneError, error.hourError]);
+    // useEffect(()=> {
+    //     if (error.streetError !== null || error.cityError !== null || error.postCodeError !== null ||
+    //         error.phoneError !== null || error.hourError !== null){
+    //         setIsError(true)
+    //     } else {
+    //         setIsError(false)
+    //     }
+    // }, [error.streetError, error.cityError, error.postCodeError, error.phoneError, error.hourError]);
 
     const style = {
         color: 'red',
@@ -68,22 +74,22 @@ const GiveawayFormPage4 = () => {
                             <label>Ulica</label>
                             <input type='text' value={street} name='street' onChange={handleInput}/>
                         </div>
-                        {error.streetError && <p style={style}>{error.streetError}</p>}
+                        {error.streetError === null ? '' : <p style={style}>{error.streetError}</p>}
                         <div className={'input__address__element'}>
                             <label>Miasto</label>
                             <input type='text' value={city} name='city' onChange={handleInput}/>
                         </div>
-                        {error.cityError && <p style={style}>{error.cityError}</p>}
+                        {error.cityError === null ? '' : <p style={style}>{error.cityError}</p>}
                         <div className={'input__address__element'}>
                             <label>Kod pocztowy</label>
                             <input type='text' value={postCode} name='postCode' onChange={handleInput}/>
                         </div>
-                        {error.postCodeError && <p style={style}>{error.postCodeError}</p>}
+                        {error.postCodeError === null ? '' : <p style={style}>{error.postCodeError}</p>}
                         <div className={'input__address__element'}>
                             <label>Numer telefonu</label>
                             <input type='text' value={phone} name='phone' onChange={handleInput}/>
                         </div>
-                        {error.phoneError && <p style={style}>{error.phoneError}</p>}
+                        {error.phoneError === null ? '' : <p style={style}>{error.phoneError}</p>}
                     </div>
                     <div className={'input__address'}>
                         <h3>Termin odbioru:</h3>
@@ -95,7 +101,7 @@ const GiveawayFormPage4 = () => {
                             <label>Godzina</label>
                             <input type='text' value={hour} name='hour' onChange={handleInput}/>
                         </div>
-                        {error.hourError && <p style={style}>{error.hourError}</p>}
+                        {error.hourError === null ? '' : <p style={style}>{error.hourError}</p>}
                         <div className={'input__address__element'}>
                             <label className={'label__supplier'}>Uwagi <br/>dla kuriera</label>
                             <textarea className={'input__supplier'} value={comment} name='comment'
@@ -109,11 +115,11 @@ const GiveawayFormPage4 = () => {
                         position:'absolute',
                         bottom:'7rem'}}>Wstecz</FooterButtonStyled>
                     </LinkStyled>
-                    <LinkStyled to={isError === false && '/giveaway/summary'}>
+                    <LinkStyled to={isError === false ? '/giveaway/summary' : '/giveaway/4'}>
                     <FooterButtonStyled style={{backgroundColor:'transparent',
                         position:'absolute',
                         bottom:'7rem',
-                        left: '12rem'}} onClick={handleSubmit}>Dalej</FooterButtonStyled>
+                        left: '12rem'}} >Dalej</FooterButtonStyled>
                     </LinkStyled>
                 </div>
             </div>

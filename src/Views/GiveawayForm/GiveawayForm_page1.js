@@ -2,10 +2,17 @@ import React, {useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
 import {LinkStyled} from "../../components/Link/Link.styles";
+import {Theme} from "../../Utils/Theme";
 
 const GiveawayFormPage1 = () => {
     const context = useContext(GiveawayContext);
-    const {type1, type2, type3, type4, type5, handleColor, handleCheck} = context;
+    const {type1, type2, type3, type4, type5, typeColor, setColors, handleCheck} = context;
+
+    //change color of checked item
+    const handleColor = (e) => {
+        const name = e.target.id;
+        setColors(prev => {return {...prev, ...typeColor, [name]: Theme.colors.firstSectionColor}})
+    };
 
     return (
         <div>

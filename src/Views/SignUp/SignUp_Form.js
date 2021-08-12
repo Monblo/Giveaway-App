@@ -5,56 +5,53 @@ import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {Theme} from "../../Utils/Theme";
 
 const SignUpForm = () => {
-    const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
-    const [email, setEmail] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [password2Error, setPassword2Error] = useState([]);
-    const [emailError, setEmailError] = useState('');
+    const [singUp, setSignUp] = useState({
+        password: '',
+        password2: '',
+        email: ''
+    });
+    const [error, setError] = useState({
+        passwordError: '',
+        password2Error: '',
+        emailError: ''
+    });
+    const [isError, setIsError] = useState();
 
-    const passwordChange = (e) => {
-        const tempPassword = e.target.value
-        setPassword(tempPassword)
-    };
-
-    const password2Change = (e) => {
-        const tempPassword2 = e.target.value
-        setPassword2(tempPassword2)
-    };
-
-    const emailChange = (e) => {
-        const tempEmail = e.target.value
-        setEmail(tempEmail)
+    const handleCheck = (e) => {
+        const tempPassword = e.target.value;
+        const name = e.target.name;
+        setSignUp({...singUp, [name]: tempPassword})
     };
 
     //SignIn validation
     const handleSumbit = (e) => {
         e.preventDefault();
 
-        if (password.length < 6){setPasswordError('Podane hasło jest za krótkie!')
+        if (singUp.password.length < 6){setError({passwordError: 'Podane hasło jest za krótkie!'})
         } else {
-            setPasswordError(null)
+            setError({passwordError: null})
         }
 
-        if (password2.length < 6 || password2 !== password){setPassword2Error('Podane hasło jest nieprawidłowe!')
+        if (singUp.password2.length < 6 || singUp.password2 !== singUp.password){
+            setError({Password2Error: 'Podane hasło jest nieprawidłowe!'})
         } else {
-            setPassword2Error(null)
+            setError({password2Error: null})
         }
 
-        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
-        if (re.test(email)){setEmailError(null)
+        const re = /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+        if (re.test(singUp.email)){setError({emailError: null})
         } else {
-            setEmailError('Podany email jest nieprawidłowy!')
+            setError({emailError: 'Podany email jest nieprawidłowy!'})
         }
     };
 
     useEffect(() => {
-        if (emailError == null && passwordError == null && password2Error == null){
-            setPassword('');
-            setEmail('');
-            setPassword2('');
+        if (error.emailError == null && error.passwordError == null && error.password2Error == null){
+            setIsError(false)
+        } else {
+            setIsError(true)
         }
-    }, [emailError, passwordError, password2Error]);
+    }, [error.emailError, error.passwordError, error.password2Error]);
 
     const errorStyle = {
         color:'red',
@@ -73,24 +70,28 @@ const SignUpForm = () => {
             <form className={'form__signIn'} onSubmit={handleSumbit}>
                 <div className={'form__signIn__field'}>
                     <label>Email</label>
-                    {emailError ? <>
-                        <input type='text' name={'email'} value={email} onChange={emailChange}
+                    {error.emailError ? <>
+                        <input type='text' name={'email'} value={singUp.email} onChange={handleCheck}
                                style={style} />
-                        <p style={errorStyle}>{emailError}</p>
-                    </> : <input type='text' name={'email'} value={email} onChange={emailChange}/>}
+                        <p style={errorStyle}>{error.emailError}</p></>
+                        : <input type='text' name={'email'} value={singUp.email} onChange={handleCheck}/>}
                     <label>Hasło</label>
-                    {passwordError ? <><input type='text' name={'password'} style={style} onChange={passwordChange}/>
-                        <p style={errorStyle}>{passwordError}</p>
-                    </> : <input type='text' name={'password'} onChange={passwordChange}/>}
+                    {error.passwordError ? <><input type='text' name={'password'} value={singUp.password}
+                                                    style={style} onChange={handleCheck}/>
+                        <p style={errorStyle}>{error.passwordError}</p></>
+                        : <input type='text' name={'password'} value={singUp.password} onChange={handleCheck}/>}
                     <label>Powtórz Hasło</label>
-                    {passwordError ? <><input type='text' name={'password2'} style={style} onChange={password2Change}/>
-                        <p style={errorStyle}>{password2Error}</p>
-                    </> : <input type='text' name={'password2'} onChange={password2Change}/>}
+                    {error.passwordError ? <><input type='text' name={'password2'} value={singUp.password2}
+                                                    style={style} onChange={handleCheck}/>
+                        <p style={errorStyle}>{error.password2Error}</p></>
+                        : <input type='text' name={'password2'} value={singUp.password2} onChange={handleCheck}/>}
                 </div>
                 <div className={"signIn__buttons"}>
-                    <FooterButtonStyled type='submit' className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
-                            Załóż konto
-                    </FooterButtonStyled>
+                    <LinkStyled to={isError === false ? '/' : '/rejestracja'}>
+                        <FooterButtonStyled type='submit' className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
+                                Załóż konto
+                        </FooterButtonStyled>
+                    </LinkStyled>
                     <LinkStyled to={'/logowanie'}>
                         <FooterButtonStyled className={'form__button'}>Zaloguj się</FooterButtonStyled>
                     </LinkStyled>

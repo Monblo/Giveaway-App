@@ -11,7 +11,6 @@ import GiveawayFormPage1 from "./GiveawayForm_page1";
 import GiveawayFormPage2 from "./GiveawayForm_page2";
 import GiveawayFormSummary from "./GiveawayForm_summary";
 import {db} from "../../firebase";
-import {Theme} from "../../Utils/Theme";
 import {Route, Switch} from "react-router-dom";
 import GiveawayFormThankYou from "./GiveawayForm_thank_you";
 
@@ -22,7 +21,13 @@ const GiveawayForm = () => {
         type:'',
         bags:'',
         localization:'',
-        helpGroup:'',
+        helpGroup: {
+            group1: '',
+            group2: '',
+            group3: '',
+            group4: '',
+            group5: ''
+        },
         helpGroupOption:''
     });
 
@@ -37,23 +42,21 @@ const GiveawayForm = () => {
     });
 
     const [colors, setColors] = useState({
-        type1: 'transparent',
-        type2: 'transparent',
-        type3: 'transparent',
-        type4: 'transparent',
-        type5: 'transparent',
-        group1: 'transparent',
-        group2: 'transparent',
-        group3: 'transparent',
-        group4: 'transparent',
-        group5: 'transparent',
+        typeColor: {
+            type1: 'transparent',
+            type2: 'transparent',
+            type3: 'transparent',
+            type4: 'transparent',
+            type5: 'transparent'
+        },
+        group: {
+            group1: 'transparent',
+            group2: 'transparent',
+            group3: 'transparent',
+            group4: 'transparent',
+            group5: 'transparent'
+        }
     });
-
-    //change color of checked item
-    const handleColor = (e) => {
-        const name = e.target.id;
-        setColors({...colors, [name]: Theme.colors.firstSectionColor});
-    };
 
     const handleCheck = (e) => {
         const name = e.target.name;
@@ -109,11 +112,11 @@ const GiveawayForm = () => {
         setAddress(tempAddress)
     };
 
-    console.log(data)
+    console.log(data.helpGroup)
 
     return (
-        <GiveawayContext.Provider value={{...data, ...address, ...colors, setData, handleColor, handleCheck, handleInput,
-            handleSubmit}}>
+        <GiveawayContext.Provider value={{...data, ...data.helpGroup, ...address, ...colors,
+            setData, setColors, handleCheck, handleInput, handleSubmit}}>
             <div>
                 <div className={'giveaway__field'}>
                     <ImgGiveaway />
