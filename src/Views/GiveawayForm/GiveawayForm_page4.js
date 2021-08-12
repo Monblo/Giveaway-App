@@ -8,40 +8,43 @@ const GiveawayFormPage4 = () => {
     const context = useContext(GiveawayContext);
     const {street, city, postCode, phone, date, hour, comment, handleInput} = context;
 
-    const [streetError, setStreetError] = useState();
-    const [cityError, setCityError] = useState();
-    const [postCodeError, setPostCodeError] = useState();
-    const [phoneError, setPhoneError] = useState();
-    const [hourError, setHourError] = useState();
+    const [error, setError] = useState({
+        streetError: '',
+        cityError: '',
+        postCodeError: '',
+        phoneError: '',
+        hourError: '',
+        isError: ''
+    });
     const [isError, setIsError] = useState();
 
     const handleSubmit = () => {
-        if (street.length < 2){setStreetError('Niepoprawna nazwa ulicy')
-        } else {setStreetError(null)}
+        if (street.length < 2){setError({street: 'Niepoprawna nazwa ulicy'})
+        } else {setError({street: null})}
 
-        if (city.length < 2){setCityError('Niepoprawna nazwa miasta')
-        } else {setCityError(null)}
+        if (city.length < 2){setError({city:'Niepoprawna nazwa miasta'})
+        } else {setError({city:null})}
 
         const reg=/^[0-9]{2}(?:-[0-9]{3})?$/;
-        if (reg.test(postCode)){setPostCodeError(null)
-        } else {setPostCodeError('Niepoprawny kod pocztowy')}
+        if (reg.test(postCode)){setError({postCode: null})
+        } else {setError({postCode: 'Niepoprawny kod pocztowy'})}
 
-        if (phone.length !== 9){setPhoneError('Niepoprawna nazwa ulicy')
-        } else {setPhoneError(null)}
+        if (phone.length !== 9){setError({phone:'Niepoprawna nazwa ulicy'})
+        } else {setError({phone:null})}
 
         const regTime = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/;
-        if (regTime.test(hour)){setHourError(null)
-        } else {setHourError('Niepoprawna godzina')}
+        if (regTime.test(hour)){setError({hour: null})
+        } else {setError({hour: 'Niepoprawna godzina'})}
     };
 
     useEffect(()=> {
-        if (streetError === null && cityError === null && postCodeError === null && phoneError === null &&
-            hourError === null){
+        if (error.streetError === null && error.cityError === null && error.postCodeError === null &&
+            error.phoneError === null && error.hourError === null){
             setIsError(false)
         } else {
             setIsError(true)
         }
-    }, [streetError, cityError, postCodeError, phoneError, hourError]);
+    }, [error.streetError, error.cityError, error.postCodeError, error.phoneError, error.hourError]);
 
     const style = {
         color: 'red',
@@ -65,22 +68,22 @@ const GiveawayFormPage4 = () => {
                             <label>Ulica</label>
                             <input type='text' value={street} name='street' onChange={handleInput}/>
                         </div>
-                        {streetError && <p style={style}>{streetError}</p>}
+                        {error.streetError && <p style={style}>{error.streetError}</p>}
                         <div className={'input__address__element'}>
                             <label>Miasto</label>
                             <input type='text' value={city} name='city' onChange={handleInput}/>
                         </div>
-                        {cityError && <p style={style}>{cityError}</p>}
+                        {error.cityError && <p style={style}>{error.cityError}</p>}
                         <div className={'input__address__element'}>
                             <label>Kod pocztowy</label>
                             <input type='text' value={postCode} name='postCode' onChange={handleInput}/>
                         </div>
-                        {postCodeError && <p style={style}>{postCodeError}</p>}
+                        {error.postCodeError && <p style={style}>{error.postCodeError}</p>}
                         <div className={'input__address__element'}>
                             <label>Numer telefonu</label>
                             <input type='text' value={phone} name='phone' onChange={handleInput}/>
                         </div>
-                        {phoneError && <p style={style}>{phoneError}</p>}
+                        {error.phoneError && <p style={style}>{error.phoneError}</p>}
                     </div>
                     <div className={'input__address'}>
                         <h3>Termin odbioru:</h3>
@@ -92,7 +95,7 @@ const GiveawayFormPage4 = () => {
                             <label>Godzina</label>
                             <input type='text' value={hour} name='hour' onChange={handleInput}/>
                         </div>
-                        {hourError && <p style={style}>{hourError}</p>}
+                        {error.hourError && <p style={style}>{error.hourError}</p>}
                         <div className={'input__address__element'}>
                             <label className={'label__supplier'}>Uwagi <br/>dla kuriera</label>
                             <textarea className={'input__supplier'} value={comment} name='comment'

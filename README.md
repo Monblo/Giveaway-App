@@ -8,6 +8,7 @@ Tech stuff:
 6. firestore
 7. form validation
 8. fetch POST data of contact form to Coderslab endpoint
+9. react context
 
 
 # Getting Started with Create React App
