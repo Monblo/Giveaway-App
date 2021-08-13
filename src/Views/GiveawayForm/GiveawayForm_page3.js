@@ -8,17 +8,20 @@ import {Redirect} from "react-router-dom";
 const GiveawayFormPage3 = () => {
     const context = useContext(GiveawayContext);
     const {
+        data,
         help1,
         help2,
         help3,
         help4,
         help5,
         helpGroupOption,
+        colors,
         group1,
         group2,
         group3,
         group4,
         group5,
+        setData,
         setColors,
         handleCheck
     } = context;
@@ -31,21 +34,34 @@ const GiveawayFormPage3 = () => {
         prevPage: false
     });
 
-    //change color of checked item
+    //check more than one group
+    const handleCheckHelpgroup = (e) => {
+        const name = e.target.name;
+
+        if (data[name] === '') {
+            setData(prev => {
+                return {...prev, [name]: e.target.value}
+            })
+        } else {
+            setData(prev => {
+                return {...prev, [name]: ''}
+            })
+        }
+    };
+
+    // change color of checked item
     const handleColor = (e) => {
-
         const name = e.target.id;
-        setColors(prev => {
-            return {...prev, [name]: Theme.colors.firstSectionColor}
-        })
 
-        // if (e.target.style.backgroundColor === 'transparent') {
-        //     setColors(prev => {
-        //         return {...prev, [name]: Theme.colors.firstSectionColor}
-        //     })
-        // } else { setColors(prev => {
-        //     return {...prev, [name]: 'transparent'}})
-        // }
+        if (colors[name] === 'transparent') {
+            setColors(prev => {
+                return {...prev, [name]: Theme.colors.firstSectionColor}
+            })
+        } else {
+            setColors(prev => {
+                return {...prev, [name]: 'transparent'}
+            })
+        }
     };
 
     //group validation
@@ -65,6 +81,7 @@ const GiveawayFormPage3 = () => {
 
         setPage({error: errorsTmp});
     };
+
 
     const handlePrev = () => {
         setPage(prev => {
@@ -98,27 +115,27 @@ const GiveawayFormPage3 = () => {
                 <div className={'list__help_groups'}>
                     <label className={'checkbox'} id='group1' style={{backgroundColor: group1}}
                            onClick={handleColor}>
-                        <input type='checkbox' value={'dzieciom'} name='help1' onClick={handleCheck}/>
+                        <input type='checkbox' value={'dzieciom'} name='help1' onClick={handleCheckHelpgroup}/>
                         dzieciom
                     </label>
                     <label className={'checkbox'} id='group2' style={{backgroundColor: group2}}
                            onClick={handleColor}>
-                        <input type='checkbox' value={'samotnym matkom'} name='help2' onClick={handleCheck}/>
+                        <input type='checkbox' value={'samotnym matkom'} name='help2' onClick={handleCheckHelpgroup}/>
                         samotnym matkom
                     </label>
                     <label className={'checkbox'} id='group3' style={{backgroundColor: group3}}
                            onClick={handleColor}>
-                        <input type='checkbox' value={'bezdomnym'} name='help3' onClick={handleCheck}/>
+                        <input type='checkbox' value={'bezdomnym'} name='help3' onClick={handleCheckHelpgroup}/>
                         bezdomnym
                     </label>
                     <label className={'checkbox'} id='group4' style={{backgroundColor: group4}}
                            onClick={handleColor}>
-                        <input type='checkbox' value={'niepełnosprawnym'} name='help4' onClick={handleCheck}/>
+                        <input type='checkbox' value={'niepełnosprawnym'} name='help4' onClick={handleCheckHelpgroup}/>
                         niepełnosprawnym
                     </label>
                     <label className={'checkbox'} id='group5' style={{backgroundColor: group5}}
                            onClick={handleColor}>
-                        <input type='checkbox' value={'osobom starszym'} name='help5' onClick={handleCheck}/>
+                        <input type='checkbox' value={'osobom starszym'} name='help5' onClick={handleCheckHelpgroup}/>
                         osobom starszym
                     </label>
                     {page.error.helpError && <p style={style}>{page.error.helpError}</p>}

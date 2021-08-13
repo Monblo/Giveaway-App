@@ -17,8 +17,6 @@ const GiveawayFormPage2 = () => {
         setPage({next: true})
     };
 
-
-
     return (
         <div>
             <div className={'alert__field'}>

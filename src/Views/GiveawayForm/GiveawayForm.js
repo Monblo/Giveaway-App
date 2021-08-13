@@ -13,6 +13,7 @@ import GiveawayFormSummary from "./GiveawayForm_summary";
 import {db} from "../../firebase";
 import {Route, Switch} from "react-router-dom";
 import GiveawayFormThankYou from "./GiveawayForm_thank_you";
+import {Theme} from "../../Utils/Theme";
 
 export const GiveawayContext = React.createContext({});
 
@@ -21,14 +22,13 @@ const GiveawayForm = () => {
         type: '',
         bags: '',
         localization: '',
-        helpGroup: {
-            help1: '',
-            help2: '',
-            help3: '',
-            help4: '',
-            help5: ''
-        },
-        helpGroupOption: ''
+        helpGroupOption: '',
+        help1: '',
+        help2: '',
+        help3: '',
+        help4: '',
+        help5: ''
+
     });
 
     const [address, setAddress] = useState({
@@ -49,13 +49,12 @@ const GiveawayForm = () => {
             type4: 'transparent',
             type5: 'transparent'
         },
-        group: {
-            group1: 'transparent',
-            group2: 'transparent',
-            group3: 'transparent',
-            group4: 'transparent',
-            group5: 'transparent'
-        }
+        group1: 'transparent',
+        group2: 'transparent',
+        group3: 'transparent',
+        group4: 'transparent',
+        group5: 'transparent'
+
     });
 
     const handleCheck = (e) => {
@@ -79,7 +78,11 @@ const GiveawayForm = () => {
                 type: data.type,
                 bags: data.bags,
                 localization: data.localization,
-                helpGroup: data.helpGroup,
+                helpGroup1: data.help1,
+                helpGroup2: data.help2,
+                helpGroup3: data.help3,
+                helpGroup4: data.help4,
+                helpGroup5: data.help5,
                 organization: data.helpGroupOption,
                 street: address.street,
                 city: address.city,
@@ -93,12 +96,11 @@ const GiveawayForm = () => {
             .catch(err => console.log(err))
     };
 
-    console.log(data.helpGroup)
-
+    console.log(data)
     return (
         <GiveawayContext.Provider value={{
-            ...data, ...data.helpGroup, ...address, ...colors, setData, setAddress, setColors,
-            handleCheck, handleInput, addNewGiveawayData,
+            ...data, ...address, ...colors, data, colors, setData, setAddress, setColors,
+            handleCheck, handleInput, addNewGiveawayData
         }}>
             <div>
                 <div className={'giveaway__field'}>

@@ -44,7 +44,11 @@ const GiveawayFormSummary = () => {
             type: '',
             bags: '',
             localization: '',
-            helpGroup: '',
+            helpGroup1: '',
+            helpGroup2: '',
+            helpGroup3: '',
+            helpGroup4: '',
+            helpGroup5: '',
             helpGroupOption: ''
         };
         setData(tempData);
@@ -58,7 +62,6 @@ const GiveawayFormSummary = () => {
             comment: ''
         };
         setAddress(tempAddress);
-        setPage({next: true});
     };
 
     return (
