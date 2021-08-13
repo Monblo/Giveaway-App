@@ -1,17 +1,24 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
-import {LinkStyled} from "../../components/Link/Link.styles";
 import {Theme} from "../../Utils/Theme";
+import {Redirect} from "react-router-dom";
 
 const GiveawayFormPage1 = () => {
     const context = useContext(GiveawayContext);
     const {type1, type2, type3, type4, type5, typeColor, setColors, handleCheck} = context;
+    const [next, setNext] = useState(false);
 
     //change color of checked item
     const handleColor = (e) => {
         const name = e.target.id;
-        setColors(prev => {return {...prev, ...typeColor, [name]: Theme.colors.firstSectionColor}})
+        setColors(prev => {
+            return {...prev, ...typeColor, [name]: Theme.colors.firstSectionColor}
+        })
+    };
+
+    const handleNextPage = () => {
+        setNext(true)
     };
 
     return (
@@ -19,14 +26,14 @@ const GiveawayFormPage1 = () => {
             <div className={'alert__field'}>
                 <h2>Ważne!</h2>
                 <p>Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy wiedzieć komu najlepiej
-                je przekazać.</p>
+                    je przekazać.</p>
             </div>
             <div className={'giveaway__form'}>
                 <p>Krok 1/4</p>
                 <h2>Zaznacz co chcesz oddać:</h2>
                 <label className={'checkbox'}>
                     <input type='checkbox' value='ubrania, które nadają sie do ponownego użycia' name='type'
-                    onChange={handleCheck} />
+                           onChange={handleCheck}/>
                     <span className={'checkmark'} id='type1'
                           style={{backgroundColor: type1}} onClick={handleColor}/>
                     ubrania, które nadają sie do ponownego użycia
@@ -40,7 +47,7 @@ const GiveawayFormPage1 = () => {
                 </label>
                 <label className={'checkbox'}>
                     <input type='checkbox' value='zabawki' name='type'
-                           onChange={handleCheck} />
+                           onChange={handleCheck}/>
                     <span className={'checkmark'} id='type3'
                           style={{backgroundColor: type3}} onClick={handleColor}/>
                     zabawki
@@ -60,12 +67,13 @@ const GiveawayFormPage1 = () => {
                     inne
                 </label>
                 <div>
-                    <LinkStyled to={'/giveaway/2'}>
-                <FooterButtonStyled style={{backgroundColor:'transparent',
-                    position:'absolute',
-                    bottom:'7rem'}}>
-                    Dalej</FooterButtonStyled>
-                    </LinkStyled>
+                    <FooterButtonStyled style={{
+                        backgroundColor: 'transparent',
+                        position: 'absolute',
+                        bottom: '7rem'
+                    }} onClick={handleNextPage}>
+                        {next && <Redirect to={'/giveaway/2'}/>}
+                        Dalej</FooterButtonStyled>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import {GiveawayContext} from "../../Views/GiveawayForm/GiveawayForm";
 
 const SelectBags = () => {
     const context = useContext(GiveawayContext);
-    const {setData, data} = context;
+    const {setData} = context;
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState('- wybierz -');
 
@@ -15,7 +15,8 @@ const SelectBags = () => {
     const handleClick = (e) => {
         setTitle(e.target.value)
         setIsOpen(prev => !prev)
-        setData({...data, bags: e.target.value})
+        setData(prev => {
+            return {...prev, bags: e.target.value}})
     };
 
     return (

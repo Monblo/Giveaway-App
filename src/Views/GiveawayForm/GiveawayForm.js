@@ -18,27 +18,27 @@ export const GiveawayContext = React.createContext({});
 
 const GiveawayForm = () => {
     const [data, setData] = useState({
-        type:'',
-        bags:'',
-        localization:'',
+        type: '',
+        bags: '',
+        localization: '',
         helpGroup: {
-            group1: '',
-            group2: '',
-            group3: '',
-            group4: '',
-            group5: ''
+            help1: '',
+            help2: '',
+            help3: '',
+            help4: '',
+            help5: ''
         },
-        helpGroupOption:''
+        helpGroupOption: ''
     });
 
     const [address, setAddress] = useState({
-        street:'',
-        city:'',
-        postCode:'',
-        phone:'',
-        date:'',
-        hour:'',
-        comment:''
+        street: '',
+        city: '',
+        postCode: '',
+        phone: '',
+        date: '',
+        hour: '',
+        comment: ''
     });
 
     const [colors, setColors] = useState({
@@ -60,12 +60,16 @@ const GiveawayForm = () => {
 
     const handleCheck = (e) => {
         const name = e.target.name;
-        setData({...data, [name]: e.target.value})
+        setData(prev => {
+            return {...prev, [name]: e.target.value}
+        })
     };
 
     const handleInput = (e) => {
         const name = e.target.name;
-        setAddress({...address, [name]: e.target.value})
+        setAddress(prev => {
+            return {...prev, [name]: e.target.value}
+        })
     };
 
     //add data to firestore from state
@@ -89,78 +93,67 @@ const GiveawayForm = () => {
             .catch(err => console.log(err))
     };
 
-    //submit giveaway form and send data to firestore & clear state
-    const handleSubmit = () => {
-        addNewGiveawayData();
-        const tempData = {
-            type:'',
-            bags:'',
-            localization:'',
-            helpGroup:'',
-            helpGroupOption:''
-        };
-        setData(tempData);
-        const tempAddress = {
-            street:'',
-            city:'',
-            postCode:'',
-            phone:'',
-            date:'',
-            hour:'',
-            comment:''
-        };
-        setAddress(tempAddress)
-    };
-
     console.log(data.helpGroup)
 
     return (
-        <GiveawayContext.Provider value={{...data, ...data.helpGroup, ...address, ...colors,
-            setData, setColors, handleCheck, handleInput, handleSubmit}}>
+        <GiveawayContext.Provider value={{
+            ...data, ...data.helpGroup, ...address, ...colors, setData, setAddress, setColors,
+            handleCheck, handleInput, addNewGiveawayData,
+        }}>
             <div>
                 <div className={'giveaway__field'}>
-                    <ImgGiveaway />
+                    <ImgGiveaway/>
                     <div className={'giveaway__nav_field'}>
                         <nav>
                             <div className={'nav__field'}>
                                 <LinkStyled to={'/giveaway'}>
-                                    <ButtonStyled className={'sign_in'} style={{width:'6rem'}}>
+                                    <ButtonStyled className={'sign_in'} style={{width: '6rem'}}>
                                         Oddaj rzeczy
                                     </ButtonStyled>
                                 </LinkStyled>
                                 <LinkStyled style={{fontWeight: 300}} to={'/wyloguj'}>
-                                    <p className={'sign_in'} style={{marginRight:'.6875rem'}}>Wyloguj</p>
+                                    <p className={'sign_in'} style={{marginRight: '.6875rem'}}>Wyloguj</p>
                                 </LinkStyled>
                             </div>
                             <div>
                                 <ul className={'header__list'}>
-                                    <LinkStyled smooth='true' to='/'><li>Start</li></LinkStyled>
-                                    <Link smooth='true' to='instruction'><li>O co chodzi?</li></Link>
-                                    <Link smooth='true' to='aboutUs'><li>O nas</li></Link>
-                                    <Link smooth='true' to='organizations'><li>Fundacja i organizacje</li></Link>
-                                    <Link smooth='true' to='contact'><li>Kontakt</li></Link>
+                                    <LinkStyled smooth='true' to='/'>
+                                        <li>Start</li>
+                                    </LinkStyled>
+                                    <Link smooth='true' to='instruction'>
+                                        <li>O co chodzi?</li>
+                                    </Link>
+                                    <Link smooth='true' to='aboutUs'>
+                                        <li>O nas</li>
+                                    </Link>
+                                    <Link smooth='true' to='organizations'>
+                                        <li>Fundacja i organizacje</li>
+                                    </Link>
+                                    <Link smooth='true' to='contact'>
+                                        <li>Kontakt</li>
+                                    </Link>
                                 </ul>
                             </div>
                         </nav>
                         <div className={'header__banner_field'}>
-                            <h2>Oddaj rzeczy, których już nie chcesz<br />
+                            <h2>Oddaj rzeczy, których już nie chcesz<br/>
                                 POTRZEBUJĄCYM</h2>
-                            <img src={decoration} />
-                            <h3 style={{fontWeight:'300'}}>Wystarczą 4 proste kroki:</h3>
+                            <img src={decoration}/>
+                            <h3 style={{fontWeight: '300'}}>Wystarczą 4 proste kroki:</h3>
                             <div className={'giveaway__instruction'}>
                                 <div className={'giveaway__instruction__field'}>
                                     <h3>1</h3>
                                     <p>Wybierz rzeczy</p>
                                 </div>
-                                <div  className={'giveaway__instruction__field'}>
+                                <div className={'giveaway__instruction__field'}>
                                     <h3>2</h3>
                                     <p>Spakuj je w worki</p>
                                 </div>
-                                <div  className={'giveaway__instruction__field'}>
+                                <div className={'giveaway__instruction__field'}>
                                     <h3>3</h3>
                                     <p>Wybierz fundację</p>
                                 </div>
-                                <div  className={'giveaway__instruction__field'}>
+                                <div className={'giveaway__instruction__field'}>
                                     <h3>4</h3>
                                     <p>Zamów kuriera</p>
                                 </div>
@@ -169,14 +162,14 @@ const GiveawayForm = () => {
                     </div>
                 </div>
                 <Switch>
-                        <Route exact path='/giveaway' component={GiveawayFormPage1}/>
-                        <Route path='/giveaway/2' component={GiveawayFormPage2}/>
-                        <Route path='/giveaway/3' component={GiveawayFormPage3}/>
-                        <Route path='/giveaway/4' component={GiveawayFormPage4}/>
-                        <Route path='/giveaway/summary' component={GiveawayFormSummary}/>
+                    <Route exact path='/giveaway' component={GiveawayFormPage1}/>
+                    <Route path='/giveaway/2' component={GiveawayFormPage2}/>
+                    <Route path='/giveaway/3' component={GiveawayFormPage3}/>
+                    <Route path='/giveaway/4' component={GiveawayFormPage4}/>
+                    <Route path='/giveaway/summary' component={GiveawayFormSummary}/>
                     <Route path='/giveaway/thankyou' component={GiveawayFormThankYou}/>
                 </Switch>
-                <Footer />
+                <Footer/>
             </div>
         </GiveawayContext.Provider>
     );

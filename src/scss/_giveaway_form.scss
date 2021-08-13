@@ -162,21 +162,17 @@
   margin-top: 0;
   margin-bottom: 2rem;
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   width: 31.25rem;
 
   .checkbox {
-    position: relative;
+    border: 1px solid $dark-color;
+    margin: 0 1rem 1rem 0;
+    padding: .5rem 1rem;
+    text-align: center;
     display: flex;
-    margin: .5rem 0;
-
-    .help_group {
-      padding: .5rem 1rem;
-      background-color: transparent;
-      border: 1px solid $dark-color;
-      cursor: pointer;
-      margin: 0 1rem 0 0;
-    }
+    cursor: pointer;
   }
 }
 

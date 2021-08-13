@@ -5,7 +5,7 @@ import {OptionWrapperLocalization} from "./SelectLocalization.styles";
 
 const SelectLocalization = () => {
     const context = useContext(GiveawayContext);
-    const {setData, data} = context;
+    const {setData} = context;
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState('- wybierz -');
 
@@ -16,7 +16,8 @@ const SelectLocalization = () => {
     const handleClick = (e) => {
         setTitle(e.target.value)
         setIsOpen(prev => !prev)
-        setData({...data, localization: e.target.value})
+        setData(prev => {
+            return {...prev, localization: e.target.value}})
     };
 
     return (
