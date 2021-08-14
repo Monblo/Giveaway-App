@@ -5,10 +5,12 @@ import NotFound from "./Views/NotFound";
 import SignUp from "./Views/SignUp/SignUp";
 import GiveawayForm from "./Views/GiveawayForm/GiveawayForm";
 import SignOut from "./Views/SignOut";
+import {AuthProvider} from "./authContext";
 function App() {
 
     return (
         <>
+            <AuthProvider>
                 <HashRouter>
                     <Switch>
                         <Route exact path='/' component={Home}/>
@@ -19,6 +21,7 @@ function App() {
                         <Route path='/*' component={NotFound}/>
                     </Switch>
                 </HashRouter>
+            </AuthProvider>
         </>
     );
 }
