@@ -1,52 +1,66 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import decoration from "../../assets/Decoration.svg";
-import {LinkStyled} from "../../components/Link/Link.styles";
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {Theme} from "../../Utils/Theme";
+import {Link, Redirect} from "react-router-dom";
+import {auth} from "../../firebase";
 
 const SignInForm = () => {
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [emailError, setEmailError] = useState('');
+    const [singInData, setSignInData] = useState({
+        password: '',
+        email: ''
+    });
+    const [error, setError] = useState({
+        passwordError: '',
+        emailError: '',
+        noError: ''
+    });
 
-    const passwordChange = (e) => {
-        const tempPassword = e.target.value
-        setPassword(tempPassword)
-    };
-
-    const emailChange = (e) => {
-        const tempEmail = e.target.value
-        setEmail(tempEmail)
+    const handleUser = (e) => {
+        const tempUser = e.target.value;
+        const name = e.target.name;
+        setSignInData({...singInData, [name]: tempUser})
     };
 
     //SignIn validation
     const handleSumbit = (e) => {
         e.preventDefault();
-
-        if (password.length < 6){setPasswordError('Podane hasło jest za krótkie!')
-        } else {
-            setPasswordError(null)
+        const errorsTmp = {
+            passwordError: null,
+            emailError: null,
+            noError: true
         }
 
-        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
-        if (re.test(email)){setEmailError(null)
-        } else {
-            setEmailError('Podany email jest nieprawidłowy!')
+        if (singInData.password.length < 6) {
+            errorsTmp.passwordError = 'Podane hasło jest za krótkie!'
         }
+
+        const re = /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+        if (re.test(singInData.email) === false) {
+            errorsTmp.emailError = 'Podany email jest nieprawidłowy!'
+        }
+
+        if (errorsTmp.passwordError !== null || errorsTmp.emailError !== null) {
+            errorsTmp.noError = false
+        }
+
+        setError(errorsTmp);
     };
 
-    useEffect(() => {
-        if (emailError == null && passwordError == null){
-            setPassword('');
-            setEmail('');
+    useEffect(async () => {
+        if (error.noError) {
+            try {
+                await auth.signInWithEmailAndPassword(singInData.email, singInData.password);
+            } catch (err) {
+                console.log(err)
+            }
         }
-    }, [emailError, passwordError]);
+    }, [error.noError]);
 
     const errorStyle = {
-        color:'red',
-        fontSize:'0.75rem',
-        fontWeight:'700'
+        color: 'red',
+        fontSize: '0.75rem',
+        fontWeight: '700'
     };
 
     const style = {
@@ -54,32 +68,32 @@ const SignInForm = () => {
     };
 
     return (
-            <div className={'signIn__container'}>
-                <h2>Zaloguj się</h2>
-                <img src={decoration} />
-                <form className={'form__signIn'} onSubmit={handleSumbit}>
-                     <div className={'form__signIn__field'}>
-                        <label>Email</label>
-                        {emailError ? <>
-                            <input type='text' name={'email'} value={email} onChange={emailChange}
-                            style={style} />
-                            <p style={errorStyle}>{emailError}</p>
-                            </> : <input type='text' name={'email'} value={email} onChange={emailChange}/>}
-                        <label>Hasło</label>
-                         {passwordError ? <><input type='text' name={'password'} style={style} onChange={passwordChange}/>
-                                 <p style={errorStyle}>{passwordError}</p>
-                             </> : <input type='text' name={'password'} onChange={passwordChange}/>}
-                    </div>
-                    <div className={"signIn__buttons"}>
-                        <LinkStyled to={'/rejestracja'}>
-                            <FooterButtonStyled className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
-                                Załóż konto
-                            </FooterButtonStyled>
-                        </LinkStyled>
-                        <FooterButtonStyled type='submit' className={'form__button'}>Zaloguj się</FooterButtonStyled>
-                    </div>
-                </form>
-            </div>
+        <div className={'signIn__container'}>
+            <h2>Zaloguj się</h2>
+            <img src={decoration}/>
+            <form className={'form__signIn'} onSubmit={handleSumbit}>
+                <div className={'form__signIn__field'}>
+                    <label>Email</label>
+                    <input type='text' name={'email'} value={singInData.email} onChange={handleUser}
+                           style={error.emailError ? style : {}}/>
+                    {error.emailError && <p style={errorStyle}>{error.emailError}</p>}
+                    <label>Hasło</label>
+                    <input type='text' name={'password'} value={singInData.password} onChange={handleUser}
+                           style={error.passwordError ? style : {}}/>
+                    {error.passwordError && <p style={errorStyle}>{error.passwordError}</p>}
+                </div>
+                <div className={"signIn__buttons"}>
+                    <Link to={'/rejestracja'}>
+                        <FooterButtonStyled className={'form__button'} style={{borderColor: Theme.colors.lightColor}}>
+                            Załóż konto
+                        </FooterButtonStyled>
+                    </Link>
+                    <FooterButtonStyled type='submit' className={'form__button'}>
+                        {error.noError && <Redirect to={'/'}/>}
+                        Zaloguj się</FooterButtonStyled>
+                </div>
+            </form>
+        </div>
     );
 };
 
