@@ -1,21 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import SelectBags from "../../components/SelectBags/SelectBags";
-import {Redirect} from "react-router-dom";
+import {GiveawayContext} from "./GiveawayForm";
 
 const GiveawayFormPage2 = () => {
-    const [page, setPage] = useState({
-        prev: false,
-        next: false
-    });
-
-    const handlePrev = () => {
-        setPage({prev: true})
-    };
-
-    const handleNext = () => {
-        setPage({next: true})
-    };
+    const context = useContext(GiveawayContext);
+    const {handleNext, handlePrev} = context;
 
     return (
         <div>
@@ -37,16 +27,14 @@ const GiveawayFormPage2 = () => {
                         backgroundColor: 'transparent',
                         position: 'absolute',
                         bottom: '7rem'
-                    }} onClick={handlePrev}>
-                        {page.prev && <Redirect to={'/giveaway'}/>}
+                    }} onClick={() => handlePrev('/giveaway')}>
                         Wstecz</FooterButtonStyled>
                     <FooterButtonStyled style={{
                         backgroundColor: 'transparent',
                         position: 'absolute',
                         bottom: '7rem',
                         left: '12rem'
-                    }} onClick={handleNext}>
-                        {page.next && <Redirect to={'/giveaway/3'}/>}
+                    }} onClick={() => handleNext('/giveaway/3')}>
                         Dalej</FooterButtonStyled>
                 </div>
             </div>

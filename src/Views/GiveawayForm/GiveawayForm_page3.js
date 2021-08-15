@@ -3,7 +3,6 @@ import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
 import SelectLocalization from "../../components/SelectLocalization/SelectLocalization";
 import {Theme} from "../../Utils/Theme";
-import {Redirect} from "react-router-dom";
 
 const GiveawayFormPage3 = () => {
     const context = useContext(GiveawayContext);
@@ -15,23 +14,15 @@ const GiveawayFormPage3 = () => {
         help4,
         help5,
         helpGroupOption,
-        colors,
-        group1,
-        group2,
-        group3,
-        group4,
-        group5,
         setData,
-        setColors,
-        handleCheck
+        handleCheck,
+        handleNext,
+        handlePrev
     } = context;
 
-    const [page, setPage] = useState({
-        error: {
-            helpError: '',
-            noError: ''
-        },
-        prevPage: false
+    const [error, setError] = useState({
+        helpError: '',
+        noError: ''
     });
 
     //check more than one group
@@ -49,21 +40,6 @@ const GiveawayFormPage3 = () => {
         }
     };
 
-    // change color of checked item
-    const handleColor = (e) => {
-        const name = e.target.id;
-
-        if (colors[name] === 'transparent') {
-            setColors(prev => {
-                return {...prev, [name]: Theme.colors.firstSectionColor}
-            })
-        } else {
-            setColors(prev => {
-                return {...prev, [name]: 'transparent'}
-            })
-        }
-    };
-
     //group validation
     const handleSubmit = () => {
         const errorsTmp = {
@@ -77,16 +53,11 @@ const GiveawayFormPage3 = () => {
 
         if (errorsTmp.helpError !== null) {
             errorsTmp.noError = false
+        } else {
+            handleNext('/giveaway/4')
         }
 
-        setPage({error: errorsTmp});
-    };
-
-
-    const handlePrev = () => {
-        setPage(prev => {
-            return {...prev, prevPage: true}
-        })
+        setError(errorsTmp);
     };
 
     //style for validation
@@ -95,6 +66,14 @@ const GiveawayFormPage3 = () => {
         fontSize: '.8rem',
         fontWeight: '700',
         width: '20rem'
+    };
+
+    const styleColored = {
+        backgroundColor: Theme.colors.firstSectionColor
+    };
+
+    const styleFree = {
+        backgroundColor: 'transparent'
     };
 
     return (
@@ -113,32 +92,27 @@ const GiveawayFormPage3 = () => {
                 </div>
                 <h3>Komu chcesz pomóc?</h3>
                 <div className={'list__help_groups'}>
-                    <label className={'checkbox'} id='group1' style={{backgroundColor: group1}}
-                           onClick={handleColor}>
+                    <label className={'checkbox'} style={help1 ? styleColored : styleFree}>
                         <input type='checkbox' value={'dzieciom'} name='help1' onClick={handleCheckHelpgroup}/>
                         dzieciom
                     </label>
-                    <label className={'checkbox'} id='group2' style={{backgroundColor: group2}}
-                           onClick={handleColor}>
+                    <label className={'checkbox'} style={help2 ? styleColored : styleFree}>
                         <input type='checkbox' value={'samotnym matkom'} name='help2' onClick={handleCheckHelpgroup}/>
                         samotnym matkom
                     </label>
-                    <label className={'checkbox'} id='group3' style={{backgroundColor: group3}}
-                           onClick={handleColor}>
+                    <label className={'checkbox'} style={help3 ? styleColored : styleFree}>
                         <input type='checkbox' value={'bezdomnym'} name='help3' onClick={handleCheckHelpgroup}/>
                         bezdomnym
                     </label>
-                    <label className={'checkbox'} id='group4' style={{backgroundColor: group4}}
-                           onClick={handleColor}>
+                    <label className={'checkbox'} style={help4 ? styleColored : styleFree}>
                         <input type='checkbox' value={'niepełnosprawnym'} name='help4' onClick={handleCheckHelpgroup}/>
                         niepełnosprawnym
                     </label>
-                    <label className={'checkbox'} id='group5' style={{backgroundColor: group5}}
-                           onClick={handleColor}>
+                    <label className={'checkbox'} style={help5 ? styleColored : styleFree}>
                         <input type='checkbox' value={'osobom starszym'} name='help5' onClick={handleCheckHelpgroup}/>
                         osobom starszym
                     </label>
-                    {page.error.helpError && <p style={style}>{page.error.helpError}</p>}
+                    {error.helpError && <p style={style}>{error.helpError}</p>}
                 </div>
                 <label>Wpisz nazwę konkretnej organizacji (opcjonalnie)</label>
                 <input className={'input__localization'} type='text' value={helpGroupOption} name='helpGroupOption'
@@ -148,8 +122,7 @@ const GiveawayFormPage3 = () => {
                         backgroundColor: 'transparent',
                         position: 'absolute',
                         bottom: '7rem'
-                    }} onClick={handlePrev}>
-                        {page.prevPage && <Redirect to={'/giveaway/2'}/>}
+                    }} onClick={() => handlePrev('/giveaway/2')}>
                         Wstecz</FooterButtonStyled>
                     <FooterButtonStyled style={{
                         backgroundColor: 'transparent',
@@ -157,7 +130,6 @@ const GiveawayFormPage3 = () => {
                         bottom: '7rem',
                         left: '12rem'
                     }} onClick={handleSubmit}>
-                        {page.error.noError && <Redirect to={'/giveaway/4'}/>}
                         Dalej</FooterButtonStyled>
                 </div>
             </div>

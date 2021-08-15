@@ -2,23 +2,17 @@ import React, {useContext, useState} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
 import {Theme} from "../../Utils/Theme";
-import {Redirect} from "react-router-dom";
 
 const GiveawayFormPage1 = () => {
     const context = useContext(GiveawayContext);
-    const {type1, type2, type3, type4, type5, typeColor, setColors, handleCheck} = context;
-    const [next, setNext] = useState(false);
+    const {type1, type2, type3, type4, type5, setColors, handleCheck, handleNext} = context;
 
     //change color of checked item
     const handleColor = (e) => {
         const name = e.target.id;
         setColors(prev => {
-            return {...prev, ...typeColor, [name]: Theme.colors.firstSectionColor}
+            return {...prev, [name]: Theme.colors.firstSectionColor}
         })
-    };
-
-    const handleNextPage = () => {
-        setNext(true)
     };
 
     return (
@@ -71,8 +65,7 @@ const GiveawayFormPage1 = () => {
                         backgroundColor: 'transparent',
                         position: 'absolute',
                         bottom: '7rem'
-                    }} onClick={handleNextPage}>
-                        {next && <Redirect to={'/giveaway/2'}/>}
+                    }} onClick={() => handleNext('/giveaway/2')}>
                         Dalej</FooterButtonStyled>
                 </div>
             </div>

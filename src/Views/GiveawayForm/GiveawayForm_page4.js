@@ -1,22 +1,18 @@
 import React, {useState, useContext} from 'react';
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
-import {Redirect} from "react-router-dom";
 
 const GiveawayFormPage4 = () => {
 
     const context = useContext(GiveawayContext);
-    const {street, city, postCode, phone, date, hour, comment, handleInput} = context;
-    const [page, setPage] = useState({
-        error: {
-            streetError: '',
-            cityError: '',
-            postCodeError: '',
-            phoneError: '',
-            hourError: '',
-            noError: ''
-        },
-        prevPage: false
+    const {street, city, postCode, phone, date, hour, comment, handleInput, handleNext, handlePrev} = context;
+    const [error, setError] = useState({
+        streetError: '',
+        cityError: '',
+        postCodeError: '',
+        phoneError: '',
+        hourError: '',
+        noError: ''
     });
 
     //validation
@@ -53,15 +49,11 @@ const GiveawayFormPage4 = () => {
         if (errorsTmp.streetError !== null || errorsTmp.cityError !== null || errorsTmp.postCodeError !== null ||
             errorsTmp.phoneError !== null || errorsTmp.hourError !== null) {
             errorsTmp.noError = false
+        } else {
+            handleNext('/giveaway/summary')
         }
 
-        setPage({error: errorsTmp});
-    };
-
-    const handlePrev = () => {
-        setPage(prev => {
-            return {...prev, prevPage: true}
-        })
+        setError(errorsTmp);
     };
 
     const style = {
@@ -86,22 +78,22 @@ const GiveawayFormPage4 = () => {
                             <label>Ulica</label>
                             <input type='text' value={street} name='street' onChange={handleInput}/>
                         </div>
-                        {page.error.streetError && <p style={style}>{page.error.streetError}</p>}
+                        {error.streetError && <p style={style}>{error.streetError}</p>}
                         <div className={'input__address__element'}>
                             <label>Miasto</label>
                             <input type='text' value={city} name='city' onChange={handleInput}/>
                         </div>
-                        {page.error.cityError && <p style={style}>{page.error.cityError}</p>}
+                        {error.cityError && <p style={style}>{error.cityError}</p>}
                         <div className={'input__address__element'}>
                             <label>Kod pocztowy</label>
                             <input type='text' value={postCode} name='postCode' onChange={handleInput}/>
                         </div>
-                        {page.error.postCodeError && <p style={style}>{page.error.postCodeError}</p>}
+                        {error.postCodeError && <p style={style}>{error.postCodeError}</p>}
                         <div className={'input__address__element'}>
                             <label>Numer telefonu</label>
                             <input type='text' value={phone} name='phone' onChange={handleInput}/>
                         </div>
-                        {page.error.phoneError && <p style={style}>{page.error.phoneError}</p>}
+                        {error.phoneError && <p style={style}>{error.phoneError}</p>}
                     </div>
                     <div className={'input__address'}>
                         <h3>Termin odbioru:</h3>
@@ -113,7 +105,7 @@ const GiveawayFormPage4 = () => {
                             <label>Godzina</label>
                             <input type='text' value={hour} name='hour' onChange={handleInput}/>
                         </div>
-                        {page.error.hourError && <p style={style}>{page.error.hourError}</p>}
+                        {error.hourError && <p style={style}>{error.hourError}</p>}
                         <div className={'input__address__element'}>
                             <label className={'label__supplier'}>Uwagi <br/>dla kuriera</label>
                             <textarea className={'input__supplier'} value={comment} name='comment'
@@ -126,8 +118,7 @@ const GiveawayFormPage4 = () => {
                         backgroundColor: 'transparent',
                         position: 'absolute',
                         bottom: '7rem'
-                    }} onClick={handlePrev}>
-                        {page.prevPage && <Redirect to={'/giveaway/3'}/>}
+                    }} onClick={() => handlePrev('/giveaway/3')}>
                         Wstecz</FooterButtonStyled>
                     <FooterButtonStyled style={{
                         backgroundColor: 'transparent',
@@ -135,7 +126,6 @@ const GiveawayFormPage4 = () => {
                         bottom: '7rem',
                         left: '12rem'
                     }} onClick={handleSubmit}>
-                        {page.error.noError && <Redirect to={'/giveaway/summary'}/>}
                         Dalej</FooterButtonStyled>
                 </div>
             </div>

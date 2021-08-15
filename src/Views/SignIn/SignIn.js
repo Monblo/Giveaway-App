@@ -34,7 +34,7 @@ const SignIn = () => {
                     </div>
                     <div>
                         <ul className={'header__list'}>
-                            <LinkStyled smooth='true' to='/'><li>Start</li></LinkStyled>
+                            <LinkStyled to='/'><li>Start</li></LinkStyled>
                             <Link smooth='true' to='instruction'><li>O co chodzi?</li></Link>
                             <Link smooth='true' to='aboutUs'><li>O nas</li></Link>
                             <Link smooth='true' to='organizations'><li>Fundacja i organizacje</li></Link>

@@ -1,14 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import decoration from "../../assets/Decoration.svg";
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {Theme} from "../../Utils/Theme";
-import {AuthContext} from "../../authContext";
-import {Link, Redirect} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {auth} from "../../firebase";
 
 const SignUpForm = () => {
-    const useAuth = useContext(AuthContext);
-    const {currentUser} = useAuth;
     const [singUpData, setSignUpData] = useState({
         password: '',
         password2: '',
@@ -20,6 +17,7 @@ const SignUpForm = () => {
         emailError: '',
         noError: ''
     });
+    const history = useHistory();
 
     const handleUser = async (e) => {
         const tempUser = e.target.value;
@@ -62,6 +60,7 @@ const SignUpForm = () => {
         if (error.noError) {
             try {
                 await auth.createUserWithEmailAndPassword(singUpData.email, singUpData.password);
+                history.push('/')
             } catch (err) {
                 console.log(err)
             }
@@ -100,7 +99,6 @@ const SignUpForm = () => {
                 <div className={"signIn__buttons"}>
                     <FooterButtonStyled type='submit' className={'form__button'}
                                         style={{borderColor: Theme.colors.lightColor}}>
-                        {error.noError && <Redirect to={'/'}/>}
                         Załóż konto
                     </FooterButtonStyled>
                     <Link to={'/logowanie'}>

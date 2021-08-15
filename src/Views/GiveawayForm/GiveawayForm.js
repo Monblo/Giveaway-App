@@ -10,10 +10,9 @@ import GiveawayFormPage4 from "./GiveawayForm_page4";
 import GiveawayFormPage1 from "./GiveawayForm_page1";
 import GiveawayFormPage2 from "./GiveawayForm_page2";
 import GiveawayFormSummary from "./GiveawayForm_summary";
-import {db} from "../../firebase";
-import {Route, Switch} from "react-router-dom";
+import {auth, db} from "../../firebase";
+import {Route, Switch, useHistory} from "react-router-dom";
 import GiveawayFormThankYou from "./GiveawayForm_thank_you";
-import {Theme} from "../../Utils/Theme";
 
 export const GiveawayContext = React.createContext({});
 
@@ -28,9 +27,7 @@ const GiveawayForm = () => {
         help3: '',
         help4: '',
         help5: ''
-
     });
-
     const [address, setAddress] = useState({
         street: '',
         city: '',
@@ -40,22 +37,14 @@ const GiveawayForm = () => {
         hour: '',
         comment: ''
     });
-
     const [colors, setColors] = useState({
-        typeColor: {
-            type1: 'transparent',
-            type2: 'transparent',
-            type3: 'transparent',
-            type4: 'transparent',
-            type5: 'transparent'
-        },
-        group1: 'transparent',
-        group2: 'transparent',
-        group3: 'transparent',
-        group4: 'transparent',
-        group5: 'transparent'
-
+        type1: 'transparent',
+        type2: 'transparent',
+        type3: 'transparent',
+        type4: 'transparent',
+        type5: 'transparent'
     });
+    const history = useHistory();
 
     const handleCheck = (e) => {
         const name = e.target.name;
@@ -69,6 +58,14 @@ const GiveawayForm = () => {
         setAddress(prev => {
             return {...prev, [name]: e.target.value}
         })
+    };
+
+    const handleNext = (path) => {
+        history.push(path)
+    };
+
+    const handlePrev = (path) => {
+        history.push(path)
     };
 
     //add data to firestore from state
@@ -99,8 +96,8 @@ const GiveawayForm = () => {
     console.log(data)
     return (
         <GiveawayContext.Provider value={{
-            ...data, ...address, ...colors, data, colors, setData, setAddress, setColors,
-            handleCheck, handleInput, addNewGiveawayData
+            ...data, ...address, ...colors, data, setData, setAddress, setColors,
+            handleCheck, handleInput, addNewGiveawayData, handleNext, handlePrev
         }}>
             <div>
                 <div className={'giveaway__field'}>
@@ -108,6 +105,7 @@ const GiveawayForm = () => {
                     <div className={'giveaway__nav_field'}>
                         <nav>
                             <div className={'nav__field'}>
+                                {/*<p className={'sign_in'}>Cześć {auth.currentUser.email} </p>*/}
                                 <LinkStyled to={'/giveaway'}>
                                     <ButtonStyled className={'sign_in'} style={{width: '6rem'}}>
                                         Oddaj rzeczy

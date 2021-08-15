@@ -3,7 +3,6 @@ import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import icon1 from '../../assets/Icon-1.svg';
 import icon4 from "../../assets/Icon-4.svg";
 import {GiveawayContext} from "./GiveawayForm";
-import {Redirect} from "react-router-dom";
 
 const GiveawayFormSummary = () => {
     const context = useContext(GiveawayContext);
@@ -26,21 +25,16 @@ const GiveawayFormSummary = () => {
         comment,
         setData,
         setAddress,
+        setColors,
         addNewGiveawayData,
+        handleNext,
+        handlePrev
     } = context;
-    const [page, setPage] = useState({
-        prev: false,
-        next: false
-    });
-
-    const handlePrev = () => {
-        setPage({prev: true})
-    };
 
     //submit giveaway form and send data to firestore & clear state
     const handleSend = () => {
         addNewGiveawayData();
-        const tempData = {
+        const dataTmp = {
             type: '',
             bags: '',
             localization: '',
@@ -51,8 +45,8 @@ const GiveawayFormSummary = () => {
             helpGroup5: '',
             helpGroupOption: ''
         };
-        setData(tempData);
-        const tempAddress = {
+        setData(dataTmp);
+        const addressTmp = {
             street: '',
             city: '',
             postCode: '',
@@ -61,7 +55,23 @@ const GiveawayFormSummary = () => {
             hour: '',
             comment: ''
         };
-        setAddress(tempAddress);
+        setAddress(addressTmp);
+        const colorsTmp = {
+            typeColor: {
+                type1: 'transparent',
+                type2: 'transparent',
+                type3: 'transparent',
+                type4: 'transparent',
+                type5: 'transparent'
+            },
+            group1: 'transparent',
+            group2: 'transparent',
+            group3: 'transparent',
+            group4: 'transparent',
+            group5: 'transparent'
+        };
+        setColors(colorsTmp);
+        handleNext('/giveaway/thankyou')
     };
 
     return (
@@ -117,8 +127,7 @@ const GiveawayFormSummary = () => {
                     backgroundColor: 'transparent',
                     position: 'absolute',
                     bottom: '7rem'
-                }} onClick={handlePrev}>
-                    {page.prev && <Redirect to={'/giveaway/4'}/>}
+                }} onClick={() => handlePrev('/giveaway/4')}>
                     Wstecz</FooterButtonStyled>
                 <FooterButtonStyled style={{
                     backgroundColor: 'transparent',
@@ -126,7 +135,6 @@ const GiveawayFormSummary = () => {
                     bottom: '7rem',
                     left: '12rem'
                 }} onClick={handleSend}>
-                    {page.next && <Redirect to={'/giveaway/thankyou'}/>}
                     Potwierdzam</FooterButtonStyled>
             </div>
         </div>

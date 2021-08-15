@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import decoration from "../../assets/Decoration.svg";
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {Theme} from "../../Utils/Theme";
-import {Link, Redirect} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {auth} from "../../firebase";
 
 const SignInForm = () => {
@@ -15,6 +15,7 @@ const SignInForm = () => {
         emailError: '',
         noError: ''
     });
+    const history = useHistory();
 
     const handleUser = (e) => {
         const tempUser = e.target.value;
@@ -51,6 +52,7 @@ const SignInForm = () => {
         if (error.noError) {
             try {
                 await auth.signInWithEmailAndPassword(singInData.email, singInData.password);
+                history.push('/')
             } catch (err) {
                 console.log(err)
             }
@@ -89,7 +91,6 @@ const SignInForm = () => {
                         </FooterButtonStyled>
                     </Link>
                     <FooterButtonStyled type='submit' className={'form__button'}>
-                        {error.noError && <Redirect to={'/'}/>}
                         Zaloguj się</FooterButtonStyled>
                 </div>
             </form>
