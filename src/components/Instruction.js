@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {LinkStyled} from "./Link/Link.styles";
 import {ButtonGiveAway} from "./Button/Button";
 import icon1 from "../assets/Icon-1.svg"
@@ -6,8 +6,11 @@ import icon2 from "../assets/Icon-2.svg"
 import icon3 from "../assets/Icon-3.svg"
 import icon4 from "../assets/Icon-4.svg"
 import DecorationImg from "./DecorationImg/DecorationImg";
+import {AuthContext} from "../authContext";
 
 const Instruction = () => {
+    const {loggedIn} = useContext(AuthContext);
+
     return (
         <div className={'instruction'} name='instruction'>
             <div className={'instruction__title'}>
@@ -41,7 +44,7 @@ const Instruction = () => {
                 </div>
             </div>
             <div>
-                <LinkStyled to='/giveaway'><ButtonGiveAway /></LinkStyled>
+                <LinkStyled to={loggedIn ? '/giveaway' : '/logowanie'}><ButtonGiveAway /></LinkStyled>
             </div>
         </div>
     );

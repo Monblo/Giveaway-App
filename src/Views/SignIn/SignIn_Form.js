@@ -51,7 +51,7 @@ const SignInForm = () => {
     useEffect(async () => {
         if (error.noError) {
             try {
-                await auth.signInWithEmailAndPassword(singInData.email, singInData.password);
+                await auth.signInWithEmailAndPassword(singInData.email, singInData.password)
                 history.push('/')
             } catch (err) {
                 console.log(err)

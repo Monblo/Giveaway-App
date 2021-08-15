@@ -4,8 +4,7 @@ import SelectBags from "../../components/SelectBags/SelectBags";
 import {GiveawayContext} from "./GiveawayForm";
 
 const GiveawayFormPage2 = () => {
-    const context = useContext(GiveawayContext);
-    const {handleNext, handlePrev} = context;
+    const {handleNext, handlePrev} = useContext(GiveawayContext);
 
     return (
         <div>

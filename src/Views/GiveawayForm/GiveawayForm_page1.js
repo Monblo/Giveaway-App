@@ -4,8 +4,7 @@ import {GiveawayContext} from "./GiveawayForm";
 import {Theme} from "../../Utils/Theme";
 
 const GiveawayFormPage1 = () => {
-    const context = useContext(GiveawayContext);
-    const {type1, type2, type3, type4, type5, setColors, handleCheck, handleNext} = context;
+    const {type1, type2, type3, type4, type5, setColors, handleCheck, handleNext} = useContext(GiveawayContext);
 
     //change color of checked item
     const handleColor = (e) => {

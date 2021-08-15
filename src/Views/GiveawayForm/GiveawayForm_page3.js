@@ -5,7 +5,6 @@ import SelectLocalization from "../../components/SelectLocalization/SelectLocali
 import {Theme} from "../../Utils/Theme";
 
 const GiveawayFormPage3 = () => {
-    const context = useContext(GiveawayContext);
     const {
         data,
         help1,
@@ -18,8 +17,7 @@ const GiveawayFormPage3 = () => {
         handleCheck,
         handleNext,
         handlePrev
-    } = context;
-
+    } = useContext(GiveawayContext);
     const [error, setError] = useState({
         helpError: '',
         noError: ''

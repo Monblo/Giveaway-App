@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {ImgGiveaway} from "../../components/Img/Img";
 import {LinkStyled} from "../../components/Link/Link.styles";
 import {ButtonStyled} from "../../components/Button/Button.styles";
@@ -13,10 +13,12 @@ import GiveawayFormSummary from "./GiveawayForm_summary";
 import {auth, db} from "../../firebase";
 import {Route, Switch, useHistory} from "react-router-dom";
 import GiveawayFormThankYou from "./GiveawayForm_thank_you";
+import {AuthContext} from "../../authContext";
 
 export const GiveawayContext = React.createContext({});
 
 const GiveawayForm = () => {
+    const {setLoggedIn, currentUserEmail} = useContext(AuthContext);
     const [data, setData] = useState({
         type: '',
         bags: '',
@@ -93,7 +95,16 @@ const GiveawayForm = () => {
             .catch(err => console.log(err))
     };
 
-    console.log(data)
+    const handleLogOut = async () => {
+        try {
+            await auth.signOut()
+            history.push('/wyloguj')
+            setLoggedIn(false)
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
     return (
         <GiveawayContext.Provider value={{
             ...data, ...address, ...colors, data, setData, setAddress, setColors,
@@ -105,14 +116,17 @@ const GiveawayForm = () => {
                     <div className={'giveaway__nav_field'}>
                         <nav>
                             <div className={'nav__field'}>
-                                {/*<p className={'sign_in'}>Cześć {auth.currentUser.email} </p>*/}
+                                <p className={'sign_in'}>Cześć {currentUserEmail} </p>
                                 <LinkStyled to={'/giveaway'}>
                                     <ButtonStyled className={'sign_in'} style={{width: '6rem'}}>
                                         Oddaj rzeczy
                                     </ButtonStyled>
                                 </LinkStyled>
                                 <LinkStyled style={{fontWeight: 300}} to={'/wyloguj'}>
-                                    <p className={'sign_in'} style={{marginRight: '.6875rem'}}>Wyloguj</p>
+                                    <ButtonStyled className={'sign_in'} style={{
+                                        marginRight: '.6875rem',
+                                        border: 'none'
+                                    }} onClick={handleLogOut}>Wyloguj</ButtonStyled>
                                 </LinkStyled>
                             </div>
                             <div>

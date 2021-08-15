@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {LinkStyled} from "../components/Link/Link.styles";
 import {ButtonStyled, FooterButtonStyled} from "../components/Button/Button.styles";
 import {Link} from "react-scroll";
-import SignInForm from "./SignIn/SignIn_Form";
 import decoration from "../assets/Decoration.svg";
-import {Theme} from "../Utils/Theme";
+import {useHistory} from "react-router-dom";
 
 const SignOut = () => {
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push('/')
+    };
+
     return (
         <div>
             <nav className={'nav__signIn'}>
@@ -22,23 +27,33 @@ const SignOut = () => {
                 </div>
                 <div>
                     <ul className={'header__list'}>
-                        <LinkStyled smooth='true' to='/'><li>Start</li></LinkStyled>
-                        <Link smooth='true' to='instruction'><li>O co chodzi?</li></Link>
-                        <Link smooth='true' to='aboutUs'><li>O nas</li></Link>
-                        <Link smooth='true' to='organizations'><li>Fundacja i organizacje</li></Link>
-                        <Link smooth='true' to='contact'><li>Kontakt</li></Link>
+                        <LinkStyled smooth='true' to='/'>
+                            <li>Start</li>
+                        </LinkStyled>
+                        <Link smooth='true' to='instruction'>
+                            <li>O co chodzi?</li>
+                        </Link>
+                        <Link smooth='true' to='aboutUs'>
+                            <li>O nas</li>
+                        </Link>
+                        <Link smooth='true' to='organizations'>
+                            <li>Fundacja i organizacje</li>
+                        </Link>
+                        <Link smooth='true' to='contact'>
+                            <li>Kontakt</li>
+                        </Link>
                     </ul>
                 </div>
             </nav>
             <div className={'signIn__container'}>
-                <h2 style={{margin:'3rem 0'}}>Wylogowanie nastąpiło <br/> pomyślnie!</h2>
-                <img src={decoration} />
-                <LinkStyled to={'/'}>
-                    <FooterButtonStyled className={'form__button'} style={{width:'7rem',
-                    marginTop:'2rem'}}>
-                        Strona główna
-                    </FooterButtonStyled>
-                </LinkStyled>
+                <h2 style={{margin: '3rem 0'}}>Wylogowanie nastąpiło <br/> pomyślnie!</h2>
+                <img src={decoration}/>
+                <FooterButtonStyled className={'log_out'} onClick={handleClick} style={{
+                    width: '7rem',
+                    marginTop: '2rem'
+                }}>
+                    Strona główna
+                </FooterButtonStyled>
             </div>
         </div>
     );

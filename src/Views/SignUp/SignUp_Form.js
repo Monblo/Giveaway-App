@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import decoration from "../../assets/Decoration.svg";
 import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {Theme} from "../../Utils/Theme";
 import {Link, useHistory} from "react-router-dom";
 import {auth} from "../../firebase";
+import {AuthContext} from "../../authContext";
 
 const SignUpForm = () => {
     const [singUpData, setSignUpData] = useState({
@@ -59,7 +60,7 @@ const SignUpForm = () => {
     useEffect(async () => {
         if (error.noError) {
             try {
-                await auth.createUserWithEmailAndPassword(singUpData.email, singUpData.password);
+                await auth.createUserWithEmailAndPassword(singUpData.email, singUpData.password)
                 history.push('/')
             } catch (err) {
                 console.log(err)

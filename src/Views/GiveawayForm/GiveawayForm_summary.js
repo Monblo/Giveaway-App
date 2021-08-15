@@ -5,7 +5,6 @@ import icon4 from "../../assets/Icon-4.svg";
 import {GiveawayContext} from "./GiveawayForm";
 
 const GiveawayFormSummary = () => {
-    const context = useContext(GiveawayContext);
     const {
         type,
         bags,
@@ -29,7 +28,7 @@ const GiveawayFormSummary = () => {
         addNewGiveawayData,
         handleNext,
         handlePrev
-    } = context;
+    } = useContext(GiveawayContext);
 
     //submit giveaway form and send data to firestore & clear state
     const handleSend = () => {

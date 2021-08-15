@@ -3,9 +3,18 @@ import {FooterButtonStyled} from "../../components/Button/Button.styles";
 import {GiveawayContext} from "./GiveawayForm";
 
 const GiveawayFormPage4 = () => {
-
-    const context = useContext(GiveawayContext);
-    const {street, city, postCode, phone, date, hour, comment, handleInput, handleNext, handlePrev} = context;
+    const {
+        street,
+        city,
+        postCode,
+        phone,
+        date,
+        hour,
+        comment,
+        handleInput,
+        handleNext,
+        handlePrev
+    } = useContext(GiveawayContext);
     const [error, setError] = useState({
         streetError: '',
         cityError: '',

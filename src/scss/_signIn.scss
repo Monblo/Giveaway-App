@@ -20,12 +20,12 @@
 }
 
 .signIn__buttons {
-    margin-top: 2rem;
-    text-align: center;
+  margin-top: 2rem;
+  text-align: center;
 
-    .form__button {
-      margin: 0 5rem;
-    }
+  .form__button {
+    margin: 0 5rem;
+  }
 }
 
 .signIn__container {
@@ -51,5 +51,9 @@
       border-bottom: 1px solid $dark-color;
       background-color: $background-color;
     }
+  }
+
+  .log_out {
+    align-self: center;
   }
 }
