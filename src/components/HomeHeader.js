@@ -11,14 +11,13 @@ import {auth} from "../firebase";
 import {useHistory} from "react-router-dom";
 
 const HomeHeader = () => {
-    const {loggedIn, setLoggedIn, currentUserEmail} = useContext(AuthContext);
+    const {currentUserEmail, currentUser} = useContext(AuthContext);
     const history = useHistory();
 
     const handleLogOut = async () => {
         try {
             await auth.signOut()
             history.push('/wyloguj')
-            setLoggedIn(false)
         } catch (err) {
             console.log(err)
         }
@@ -30,7 +29,7 @@ const HomeHeader = () => {
             <div className={'header__nav_field'}>
                 <nav>
                     <div className={'nav__field'}>
-                        {loggedIn ? (<>
+                        {currentUser ? (<>
                             <p className={'sign_in'}>Cześć {currentUserEmail}</p>
                             <LinkStyled to={'/giveaway'}>
                                 <ButtonStyled className={'sign_in'} style={{width: '6rem'}}>
@@ -76,7 +75,7 @@ const HomeHeader = () => {
                         Oddaj niechciane rzeczy w zaufane ręce</h2>
                     <img src={decoration}/>
                     <div>
-                        <LinkStyled to={loggedIn ? '/giveaway' : '/logowanie'}><ButtonGiveAway/></LinkStyled>
+                        <LinkStyled to={currentUser ? '/giveaway' : '/logowanie'}><ButtonGiveAway/></LinkStyled>
                         <LinkStyled to={'/logowanie'}><HeaderButton
                             className={'button'}>Zorganizuj <br/>zbiórkę</HeaderButton></LinkStyled>
                     </div>

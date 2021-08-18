@@ -5,12 +5,10 @@ export const AuthContext = React.createContext({});
 
 export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null);
-    const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             setCurrentUser(user)
-            setLoggedIn(true)
         })
     }, []);
 
@@ -19,8 +17,6 @@ export const AuthProvider = ({children}) => {
     const value = {
         currentUser,
         setCurrentUser,
-        loggedIn,
-        setLoggedIn,
         currentUserEmail
     };
 

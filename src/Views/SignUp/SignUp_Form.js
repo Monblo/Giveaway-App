@@ -89,11 +89,11 @@ const SignUpForm = () => {
                            style={error.emailError ? style : {}}/>
                     {error.emailError && <p style={errorStyle}>{error.emailError}</p>}
                     <label>Hasło</label>
-                    <input type='text' name={'password'} value={singUpData.password} onChange={handleUser}
+                    <input type='password' name={'password'} value={singUpData.password} onChange={handleUser}
                            style={error.passwordError ? style : {}}/>
                     {error.passwordError && <p style={errorStyle}>{error.passwordError}</p>}
                     <label>Powtórz Hasło</label>
-                    <input type='text' name={'password2'} value={singUpData.password2} onChange={handleUser}
+                    <input type='password' name={'password2'} value={singUpData.password2} onChange={handleUser}
                            style={error.password2Error ? style : {}}/>
                     {error.password2Error && <p style={errorStyle}>{error.password2Error}</p>}
                 </div>

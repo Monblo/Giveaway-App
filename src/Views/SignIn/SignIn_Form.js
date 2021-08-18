@@ -80,7 +80,7 @@ const SignInForm = () => {
                            style={error.emailError ? style : {}}/>
                     {error.emailError && <p style={errorStyle}>{error.emailError}</p>}
                     <label>Hasło</label>
-                    <input type='text' name={'password'} value={singInData.password} onChange={handleUser}
+                    <input type='password' name={'password'} value={singInData.password} onChange={handleUser}
                            style={error.passwordError ? style : {}}/>
                     {error.passwordError && <p style={errorStyle}>{error.passwordError}</p>}
                 </div>

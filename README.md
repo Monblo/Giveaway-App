@@ -1,4 +1,5 @@
-
+Project of website with the form that allows Users to giveaway things. 
+Main page contains section of 'who we help' with switching between groups and pagination. It gets data from the firestore. There is a contact form with validation, it sends data to the coderslab endpoint. There are routing pages with authorization and giveaway form with multiple choice. Only signed in Users are allowed to use the giveaway form.  
 
 Tech stuff:
 

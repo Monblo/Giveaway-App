@@ -9,7 +9,7 @@ import DecorationImg from "./DecorationImg/DecorationImg";
 import {AuthContext} from "../authContext";
 
 const Instruction = () => {
-    const {loggedIn} = useContext(AuthContext);
+    const {currentUser} = useContext(AuthContext);
 
     return (
         <div className={'instruction'} name='instruction'>
@@ -44,7 +44,7 @@ const Instruction = () => {
                 </div>
             </div>
             <div>
-                <LinkStyled to={loggedIn ? '/giveaway' : '/logowanie'}><ButtonGiveAway /></LinkStyled>
+                <LinkStyled to={currentUser ? '/giveaway' : '/logowanie'}><ButtonGiveAway /></LinkStyled>
             </div>
         </div>
     );
