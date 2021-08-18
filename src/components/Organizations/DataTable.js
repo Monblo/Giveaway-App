@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import Pagination from "../Pagination";
 
-const OrganizationsSection3 = ({locals}) => {
+export const DataTable = ({data}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage, setPostPerPage] = useState(3);
 
     //table pagination
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const currentPosts = locals.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
 
     //change table pages
     const changePage = (pageNumber) => {
@@ -31,10 +31,8 @@ const OrganizationsSection3 = ({locals}) => {
                 )}
                 </tbody>
             </table>
-            {locals.length > postPerPage &&
-            <Pagination postPerPage={postPerPage} posts={locals.length} changePage={changePage}/>}
+            {data.length > postPerPage &&
+            <Pagination postPerPage={postPerPage} posts={data.length} changePage={changePage}/>}
         </>
     );
 };
-
-export default OrganizationsSection3;

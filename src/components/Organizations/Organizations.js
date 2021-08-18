@@ -1,59 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import DecorationImg from "../DecorationImg/DecorationImg";
 import {OrganizationsButton} from "../Button/Button.styles";
-import Organizations_section3 from "./Organizations_section3";
-import OrganizationsSection1 from "./Organizations_section1";
-import OrganizationsSection2 from "./Organizations_section2";
 import {db} from "../../firebase";
 import {Theme} from "../../Utils/Theme";
+import {DataTable} from "./DataTable";
 
 const Organizations = () => {
-    const [section, setSection] = useState({
+    const [selectTable, setSelectTable] = useState('foundations')
+    const [page, setPage] = useState({
         section1: true,
         section2: false,
         section3: false
     });
     const [institutions, setInstitutions] = useState({
-        fundations: [],
+        foundations: [],
         organizations: [],
         locals: []
     });
 
-    //change the view
-    const handleClick1 = () => {
-        setSection(prev => {
-            return {...prev, section1: prevState => !prevState}
-        })
-        setSection(prev => {
-            return {...prev, section2: false}
-        })
-        setSection(prev => {
-            return {...prev, section3: false}
-        })
-    };
-
-    const handleClick2 = () => {
-        setSection(prev => {
-            return {...prev, section2: prevState => !prevState}
-        })
-        setSection(prev => {
-            return {...prev, section3: false}
-        })
-        setSection(prev => {
-            return {...prev, section1: false}
-        })
-    };
-
-    const handleClick3 = () => {
-        setSection(prev => {
-            return {...prev, section3: prevState => !prevState}
-        })
-        setSection(prev => {
-            return {...prev, section2: false}
-        })
-        setSection(prev => {
-            return {...prev, section1: false}
-        })
+    const handleOrganization = (e, path) => {
+        const pageTmp = {
+            section1: false,
+            section2: false,
+            section3: false
+        };
+        const name = e.target.name
+        pageTmp[name] = true
+        setPage(pageTmp);
+        setSelectTable(path)
     };
 
     //get data from firestore to state
@@ -67,7 +41,7 @@ const Organizations = () => {
                     items = [...items, data]
                 })
                 setInstitutions(prev => {
-                    return {...prev, fundations: items}
+                    return {...prev, foundations: items}
                 })
             })
             .catch(error => console.log(error))
@@ -114,17 +88,18 @@ const Organizations = () => {
             <h2>Komu pomagamy?</h2>
             <DecorationImg/>
             <div className={'organizations__buttons'}>
-                {section.section1 ? <OrganizationsButton onClick={handleClick1} style={styleOn}>Fundacjom
-                </OrganizationsButton> : <OrganizationsButton onClick={handleClick1} style={styleOff}>
-                    Fundacjom</OrganizationsButton>}
-                <OrganizationsButton onClick={handleClick2}>Organizacjom Pozarządowym</OrganizationsButton>
-                <OrganizationsButton onClick={handleClick3}>Lokalnym Zbiórkom</OrganizationsButton>
+                <OrganizationsButton name={'section1'} onClick={(e) => handleOrganization(e, 'foundations')}
+                                     style={page.section1 ? styleOn : styleOff}>
+                    Fundacjom</OrganizationsButton>
+                <OrganizationsButton name={'section2'} onClick={(e) => handleOrganization(e, 'organizations')}>
+                    Organizacjom Pozarządowym</OrganizationsButton>
+                <OrganizationsButton name={'section3'} onClick={(e) => handleOrganization(e, 'locals')}>
+                    Lokalnym Zbiórkom</OrganizationsButton>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et
                 dolore magna aliqua. Ut enim ad minim veniam.</p>
-            {section.section1 ? <OrganizationsSection1 {...institutions} /> : ''}
-            {section.section2 ? <OrganizationsSection2 {...institutions} /> : ''}
-            {section.section3 ? <Organizations_section3 {...institutions} /> : ''}
+            <DataTable data={institutions[selectTable]} />
         </div>
     );
 };
